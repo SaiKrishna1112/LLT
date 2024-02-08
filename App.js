@@ -15,18 +15,18 @@ export default function App() {
   return (
 			<NavigationContainer>
 					<Stack.Navigator
-				   	initialRouteName="Universities List"
+				   	// initialRouteName="Login"
 								screenOptions = {{
 									headerTintColor: 'white',
 									headerTitleStyle: styles.headerTitleStyle,
 									headerMode: 'float',
-									headerShown: true,
+									headerShown: false,
 									headerStyle: {
 							backgroundColor: '#0384d5',
 					},}}>
 							<Stack.Screen name="Login" component={Auth} />
 							<Stack.Screen name="Forgot Password" component={ForgotPassword} />
-							<Stack.Screen name="Universities List" component={UniversitiesList} />
+							<Stack.Screen name="Universities List" component={UniversitiesList} options={{headerShown:true}}/>
 					</Stack.Navigator>
 			</NavigationContainer>
   );

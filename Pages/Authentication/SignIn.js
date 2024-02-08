@@ -61,7 +61,8 @@ const Signin = (props) => {
 																</TouchableOpacity>
 														</ScrollView>
 														<View>
-																<TouchableOpacity style={styles.btn}>
+																<TouchableOpacity style={styles.btn} 
+																onPress={()=>navigation.navigate("Universities List")}>
 																		<Text
 																				style={{
 																						textAlign: "center",

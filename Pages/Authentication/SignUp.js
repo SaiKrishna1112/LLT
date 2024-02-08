@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
 			width: width * 0.8,
 			borderRadius: 25,
 			elevation: 5,
-			height: height * 0.42,
+			height: height * 0.45,
 			position: "relative",
 	},
 	inputBox: {
