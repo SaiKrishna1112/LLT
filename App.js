@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ForgotPassword from "./Pages/Authentication/ForgotPassword"
 import Auth from "./Pages/Authentication/Auth"
 import UniversitiesList from "./Pages/Universities/UniversitiesList"
+import UniversitiesListAndChat from './Pages/Chat/UniversitiesListAndChat';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ export default function App() {
   return (
 			<NavigationContainer>
 					<Stack.Navigator
-				   	// initialRouteName="Login"
+				   	initialRouteName="Universities List"
 								screenOptions = {{
 									headerTintColor: 'white',
 									headerTitleStyle: styles.headerTitleStyle,
@@ -27,6 +28,8 @@ export default function App() {
 							<Stack.Screen name="Login" component={Auth} />
 							<Stack.Screen name="Forgot Password" component={ForgotPassword} />
 							<Stack.Screen name="Universities List" component={UniversitiesList} options={{headerShown:true}}/>
+							<Stack.Screen name="Universities List And Chat" component={UniversitiesListAndChat} options={{headerShown:true}}/>
+
 					</Stack.Navigator>
 			</NavigationContainer>
   );
