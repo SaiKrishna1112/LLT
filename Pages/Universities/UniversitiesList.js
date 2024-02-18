@@ -94,9 +94,9 @@ const UniversitiesList =()=>{
 							<Text style={styles.txt}>PTE 74</Text>
 						</View>
 					</View>
-						<View style={{width:width*0.4,justifyContent:"flex-end"}}>
+						<View style={{width:width*0.45,justifyContent:"flex-end"}}>
 							<TouchableOpacity style={styles.applyBtn} onPress={()=>navigation.navigate("Universities List And Chat")}>
-								<Text style={styles.txt}>Applied</Text>
+								<Text style={styles.txt2}>Applied</Text>
 							</TouchableOpacity>		
 						</View>
 				</View>
@@ -115,10 +115,10 @@ const UniversitiesList =()=>{
 						</View>
                         <View style={styles.bottom}>
 							<TouchableOpacity style={styles.hStyle}>
-								<Text style={styles.txt}>H</Text>
+								<Text style={styles.txt2}>H</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.hStyle}>
-								<Text style={styles.txt}>M</Text>
+								<Text style={styles.txt2}>M</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
 		flex:1
 	},
 	boxContainer:{
-		width:width*0.9,
+		width:width*0.95,
 		height:height*0.40,
 		backgroundColor:"white",
 		elevation:5,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 	TxtStylesHeader:{
 		flexDirection:"row",
 		marginVertical:15,
-		width:width*0.5
+		width:width*0.7
 	},
 	headLineView:{
 		flexDirection:"row",
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
 		height:22,
 		borderRadius:20,
 		backgroundColor:"white",
-		marginLeft:40,
+		marginLeft:60,
 		marginRight:10,
 		alignItems:"center",
 		justifyContent:"center",
@@ -172,12 +172,12 @@ const styles = StyleSheet.create({
 	},
 	nameList:{
 		flexDirection:"row",
-		 width:width*0.8,
+		 width:width*0.85,
 		 marginVertical:8,
 	},
 	txtLine:{
 		flexDirection:"row",
-		width:width*0.4
+		width:width*0.45
 	},
 	iconCircle:{
 		width:20,
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
 	scoreView:{
 		flexDirection:"row",
 		// width:width*0.4,
-		marginHorizontal:10
+		marginHorizontal:18
 	},
 	txt:{
 		fontSize:12,
@@ -216,6 +216,10 @@ const styles = StyleSheet.create({
 		color:"#0384d5",
 		fontWeight:"bold"
 	},
+	txt2:{
+		color:"white",
+		fontWeight:"bold"
+	},
 	bottom: {
 		alignSelf: "flex-end",
 		// left: 0,
@@ -223,7 +227,6 @@ const styles = StyleSheet.create({
 		bottom:0,
 		justifyContent:"space-between",
 		flexDirection:"row",
-		
 	},
 	applyBtn:{
 		width:90,

@@ -75,33 +75,39 @@ const styles = StyleSheet.create({
 	},
 	btns:{
 		flexDirection:"row",
-		justifyContent:"space-around",
+		// justifyContent:"space-evenly",
 		backgroundColor:"white",
 		borderRadius:5,
-		width:width*0.85,
+		width:width*0.84,
 		alignSelf:"center",
 		margin:20,
 		height:35,
 		elevation:5,
-		paddingTop:5
+		alignItems:"center"
+		// paddingTop:5
 	},
 	buttonActive:{
 		backgroundColor:"#0384d5",
-		width:width*0.35,
-		height:25,
-		borderRadius:5
+		width:width*0.28,
+		height:35,
+		borderRadius:5,
+		alignItems:"center",
+		justifyContent:"center"
 	},
 	buttonActiveTxt:{
 		color:"white",
-		marginTop:2,
-		alignSelf:"center"
+		alignSelf:"center",
+		fontWeight:"bold"
 
 	},
 	buttonDeactive:{
 		backgroundColor:"white",
-		// width:width*0.3
-		marginTop:3
-	}	,
+		width:width*0.28,
+		height:35,
+		borderRadius:5,
+		alignItems:"center",
+		justifyContent:"center"
+	},
 	buttonDeactiveTxt:{
 		color:"black"
 

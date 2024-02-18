@@ -8,6 +8,8 @@ import ForgotPassword from "./Pages/Authentication/ForgotPassword"
 import Auth from "./Pages/Authentication/Auth"
 import UniversitiesList from "./Pages/Universities/UniversitiesList"
 import UniversitiesListAndChat from './Pages/Chat/UniversitiesListAndChat';
+import Profile from './Pages/Profile/Profile';
+import EditProfile from './Pages/Profile/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +18,7 @@ export default function App() {
   return (
 			<NavigationContainer>
 					<Stack.Navigator
-				   	initialRouteName="Universities List"
+				   	initialRouteName="Profile"
 								screenOptions = {{
 									headerTintColor: 'white',
 									headerTitleStyle: styles.headerTitleStyle,
@@ -29,7 +31,8 @@ export default function App() {
 							<Stack.Screen name="Forgot Password" component={ForgotPassword} />
 							<Stack.Screen name="Universities List" component={UniversitiesList} options={{headerShown:true}}/>
 							<Stack.Screen name="Universities List And Chat" component={UniversitiesListAndChat} options={{headerShown:true}}/>
-
+							<Stack.Screen name="Profile" component={Profile} options={{headerShown:false}}/>
+							<Stack.Screen name="Edit" component={EditProfile} options={{headerShown:true}}/>
 					</Stack.Navigator>
 			</NavigationContainer>
   );
