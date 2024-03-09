@@ -1,49 +1,63 @@
-import { StyleSheet, Text, View,Dimensions,Image,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View,Dimensions,Image,TouchableOpacity,FlatList } from 'react-native'
 import React,{useState} from 'react'
+import { useNavigation } from '@react-navigation/native'
 const{height,width}=Dimensions.get('window')
 
 
+const data = [1,2,3,4,5,6]
+
 const UniversityNewChat = () => {
+	const navigation = useNavigation()
+	const renderItem = ({item,index})=>{
+		return(
+			<TouchableOpacity onPress={()=>navigation.navigate("Chats")}>
+			<View style={{backgroundColor:"#c0c0c0",height:"auto",marginTop:10}}>
+									{/* <Text>Sreeja</Text> */}
+									<View style={{flexDirection:"row"}}>
+	
+										<View>
+												<Image source={require('../../assets/university.jpg')} style={styles.img}/>
+										</View>
+	
+										<View>
+											<View style={{flexDirection:"row"}}>
+													<View>
+														<Text style={{marginLeft:15,fontSize:18,marginTop:3,width:width*0.52}}>University of Arizon, USA</Text>
+													</View>
+													<View>
+														<Text style={{marginLeft:10,fontSize:15,marginTop:3}}>12:34 pm</Text>
+													</View>
+											</View>
+	
+											<View style={{flexDirection:"row"}}>
+													<View>
+														<Text style={{marginLeft:15,fontSize:15,marginTop:3,width:width*0.58}}>You : I am trying to reach....</Text>
+													</View>
+													<View style={{backgroundColor:"#0384d5",height:20,width:20,borderRadius:100}}>
+																<Text style={{alignSelf:"center",justifyContent:"center",color:"white"}}>2</Text>
+													</View>
+											</View>
+	
+	
+										</View>
+	
+	
+	
+									</View>
+							</View>
+							</TouchableOpacity>
+		)
+	}
+	
   return (
     <View>
 
 		{/* <Text>New Chat</Text> */}
 
-
-<View style={{backgroundColor:"#c0c0c0",height:"auto",marginTop:10}}>
-								{/* <Text>Sreeja</Text> */}
-								<View style={{flexDirection:"row"}}>
-
-									<View>
-											<Image source={require('../../assets/university.jpg')} style={styles.img}/>
-									</View>
-
-									<View>
-										<View style={{flexDirection:"row"}}>
-												<View>
-													<Text style={{marginLeft:15,fontSize:18,marginTop:3,width:width*0.52}}>University of Arizon, USA</Text>
-												</View>
-												<View>
-													<Text style={{marginLeft:10,fontSize:15,marginTop:3}}>12:34 pm</Text>
-												</View>
-										</View>
-
-										<View style={{flexDirection:"row"}}>
-												<View>
-													<Text style={{marginLeft:15,fontSize:15,marginTop:3,width:width*0.58}}>You : I am trying to reach....</Text>
-												</View>
-												<View style={{backgroundColor:"#0384d5",height:20,width:20,borderRadius:100}}>
-															<Text style={{alignSelf:"center",justifyContent:"center",color:"white"}}>2</Text>
-												</View>
-										</View>
-
-
-									</View>
-
-
-
-								</View>
-						</View>
+						<FlatList 
+						data={data}
+						renderItem={renderItem}
+						keyExtractor={(item,index)=>index}/>
                 </View>
   )
 }

@@ -1,14 +1,12 @@
-import { StyleSheet, Text, View,Dimensions,SafeAreaView ,Image,TouchableOpacity,TextInput, ScrollView} from 'react-native'
+import { StyleSheet, Text, View,Dimensions ,TouchableOpacity,TextInput, Platform,ScrollView} from 'react-native'
 import React,{useState} from 'react'
-import  Icon  from 'react-native-vector-icons/Ionicons'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { RadioButton,Button  } from 'react-native-paper';
-import PhoneInput from "react-native-phone-number-input";
-
-
+import FontAwesome5  from "react-native-vector-icons/FontAwesome5"
 const{height,width}=Dimensions.get('window')
+import { RadioButton,Button  } from 'react-native-paper';
+import DatePicker from "@react-native-community/datetimepicker";
+import { Dropdown } from "react-native-element-dropdown";
 
-const Profile = () => {
+const ProfileDetails = () => {
 
   const [inputFields, setInputFields] = useState({
     firstName:"",
@@ -308,82 +306,12 @@ const showMode7 = (currentMode) => {
 //----------------school End-----------------//
 
 
-//  Phone Number handler  //
-
-const handlerPhoneNumber=(value)=>{
-    try {
-      setInputFields({...inputFields,contactNumber:value})
-      const callingCode = PhoneInput.getCallingCode(value);
-      var countryCode = callingCode;
-    } catch (error) {
-      
-    }
-}
-
-  return (
+return (
     <View>
-      <ScrollView>
-        <View style={{backgroundColor:"white",width:width*0.96,alignSelf:"center",justifyContent:"center"}}>
+    <ScrollView>
+          <View style={styles.personalDetailsContainer}>
 
-
-        <View style={styles.container1}>
-          
-          </View>
-  
-          <View style={styles.rowContainer}>
-                <View style={styles.editContainer}>
-                    <FontAwesome5 name="user-edit" size={18} color="#0384d5" style={{justifyContent:"center",alignSelf:"center",}} />
-                </View>
-                <View style={styles.likeContainer}>
-                    <Icon name="heart" size={25} color="#0384d5" style={{justifyContent:"center",alignSelf:"center",}} />
-                </View>
-             </View>
-  
-          <View style={styles.imgView}>
-              {/* <Image source={require('../assets/white-bg.jpg')} style={styles.img}/> */}
-          </View>
-
-<View>
-          <View style={styles.rowContainer1}>
-              <View style={styles.editContainer1}>
-                  <FontAwesome5 name="user" size={15} color="white" style={{justifyContent:"center",alignSelf:"center",}} />
-              </View>
-              <Text style={{fontSize:18}}>Sai Krishna Dharmapuri</Text>
-          </View>
-
-          <View style={styles.rowContainer1}>
-              <View style={styles.editContainer1}>
-                  <FontAwesome5 name="phone" size={13} color="white" style={{justifyContent:"center",alignSelf:"center",top:2}} />
-              </View>
-              <Text style={{fontSize:18}}>+91 9876543210</Text>
-              <View style={styles.editContainer2}>
-                  <Icon name="people-outline" size={15} color="white" style={{justifyContent:"center",alignSelf:"center"}} />
-              </View>
-              <Text style={{fontSize:18}}>Male</Text>
-              
-          </View>
-
-          <View style={styles.rowContainer1}>
-              <View style={styles.editContainer1}>
-                  <FontAwesome5 name="calendar-alt" size={15} color="white" style={{justifyContent:"center",alignSelf:"center",}} />
-              </View>
-              <Text style={{fontSize:18}}>12-07-1991</Text>
-          </View>
-
-          <View style={styles.rowContainer1}>
-              <View style={styles.editContainer1}>
-                  <Icon name="mail" size={15} color="white" style={{justifyContent:"center",alignSelf:"center",top:1}} />
-              </View>
-              <Text style={{fontSize:18}}>somethingspecial18181@gmail.com</Text>
-          </View>
-</View>
-
-        </View>
-     
-
-<View>
-  <View style={styles.detailsContainer}>
-        <View style={styles.rowContainer2}>
+              <View style={styles.rowContainer}>
                   <View style={styles.detailsView}>
                     <View style={styles.details}>
                       <Text style={styles.detailstext}>Personal Details</Text>
@@ -402,16 +330,23 @@ const handlerPhoneNumber=(value)=>{
                       <Text style={styles.canceltext}>Cancel</Text>
                     </TouchableOpacity>
                   </View>
-        </View>
-           {/* Name */}
-           <View>
-                <View style={{width:width*0.9,left:5}}>
-                  <View style={styles.rowContainer2}>
+              </View>
+
+    {/* Name */}
+          <View>
+                <View style={{width:width*0.95,left:5}}>
+                  <View style={styles.rowContainer}>
+                      <Text style={{top:5,left:3}}>Name: </Text>
                       <TextInput style={styles.input}
                             placeholder='First Name' 
                             value={inputFields.firstName}
                             onChangeText = {(text) => setInputFields({...inputFields, firstName : text})}  
                                 />  
+                      <TextInput style={styles.input}
+                            placeholder='Middle Name' 
+                            value={inputFields.middleName}
+                            onChangeText = {(text) => setInputFields({...inputFields, middleName : text})}
+                                /> 
                       <TextInput style={styles.input}
                             placeholder='Last Name' 
                             value={inputFields.lastName}
@@ -421,28 +356,15 @@ const handlerPhoneNumber=(value)=>{
                 </View>
 
                 <View style={{width:width*0.95,}}>
-                  <View style={styles.rowContainer2}>
-                      {/* <Text>Contact Number: </Text> */}
-                      <View>
-                         
-                      </View>
+                  <View style={styles.rowContainer}>
+                      <Text>Contact Number: </Text>
                       <TextInput style={styles.Contactinput}
                             placeholder='+0 0000 00000' 
                             value={inputFields.contactNumber}
                             keyboardType='number-pad'
                             onChangeText = {(number) => setInputFields({...inputFields, contactNumber : number})}  
                                 />  
-                                <PhoneInput
-                                placeholder='contact number'
-                                containerStyle={styles.input}
-                                textInputStyle={styles.input}
-                                codeTextStyle={styles.input}
-                                ref={(ref)=>(phoneInput = ref)}
-                                defaultValue=''
-                                layout='first'
-                                onChangeText={handlerPhoneNumber}/>
-                  </View>
-                  <Text style={{marginTop:3}}>Gender: </Text>
+                      <Text style={{marginTop:3}}>Gender: </Text>
                       <View style={{marginTop:-5,marginLeft:-10}}>
                           <RadioButton.Group onValueChange = {(value) => setInputFields({...inputFields, genderSelect : value})}
                                       value={inputFields.genderSelect}>
@@ -452,10 +374,14 @@ const handlerPhoneNumber=(value)=>{
                               </View>
                           </RadioButton.Group>
                       </View>
+
+
+                      
+                  </View>
                 </View>
 
                 <View style={{width:width*0.95}}>
-                  <View style={styles.rowContainer2}>
+                  <View style={styles.rowContainer}>
                       <Text>Email: </Text>
                       <TextInput style={styles.emailinput}
                             placeholder='abc@gmail.com' 
@@ -468,7 +394,7 @@ const handlerPhoneNumber=(value)=>{
                 </View>
 
                 <View style={{width:width*0.95}}>
-                  <View style={styles.rowContainer2}>
+                  <View style={styles.rowContainer}>
                       <Text>Whatsapp Number: </Text>
                       <TextInput style={styles.whatsappinput}
                             placeholder='+0 0000 00000' 
@@ -495,11 +421,12 @@ const handlerPhoneNumber=(value)=>{
                   </View>
                 </View>
           </View>
+                <View style={{borderBottomColor:"#c0c0c0",borderBottomWidth:1.5,margin:15}}/>
 
-           {/* Passport Number and Country of Birth */}
-           <View>
+    {/* Passport Number and Country of Birth */}
+          <View>
                 <View style={{width:width*0.95}}>
-                  <View style={styles.rowContainer2}>
+                  <View style={styles.rowContainer}>
                       <Text style={{width:width*0.15}}>Passport Number</Text>
                       <TextInput style={styles.Contactinput}
                             // placeholder='+0 0000 00000' 
@@ -530,7 +457,7 @@ const handlerPhoneNumber=(value)=>{
                 </View>
 
                 <View style={{width:width*0.95}}>
-                  <View style={styles.rowContainer2}>
+                  <View style={styles.rowContainer}>
                       <Text style={{width:width*0.15}}>Country of Birth</Text>
                       <TextInput style={styles.Contactinput}
                             // placeholder='+0 0000 00000' 
@@ -559,65 +486,70 @@ const handlerPhoneNumber=(value)=>{
                   </View>
                 </View>
           </View>
-
-          {/* Address */}
-          <View style={{width:width*0.95}}>
                 
-                <View style={{flexDirection:"row"}}>
-                  <View style={{width:width*0.16,top:5}}>
-                    <Text style={{marginLeft:10}}>Address</Text>
+
+                <View style={{borderBottomColor:"#c0c0c0",borderBottomWidth:1.5,margin:15}}/>
+
+    {/* Address */}
+                <View style={{width:width*0.95}}>
+                
+                  <View style={{flexDirection:"row"}}>
+                    <View style={{width:width*0.15}}>
+                      <Text style={{marginLeft:10}}>Address</Text>
+                    </View>
+                    <View style={{width:width*0.8,flexDirection:"row",justifyContent:"space-around"}}>
+                    <TextInput style={styles.input}
+                                          placeholder='Street' 
+                                          value={inputFields.streetName}
+                                          onChangeText = {(text) => setInputFields({...inputFields, streetName : text})}  
+                                              />  
+                                    <TextInput style={styles.input}
+                                          placeholder='City' 
+                                          value={inputFields.city}
+                                          onChangeText = {(text) => setInputFields({...inputFields, city : text})}
+                                              /> 
+                                    <TextInput style={styles.input}
+                                          placeholder='District' 
+                                          value={inputFields.district}
+                                          onChangeText = {(text) => setInputFields({...inputFields, district : text})}
+                                              /> 
+                    </View>
                   </View>
-                  <View style={{width:width*0.78,flexDirection:"row",justifyContent:"space-around"}}>
-                  <TextInput style={styles.input}
-                                        placeholder='Street' 
-                                        value={inputFields.streetName}
-                                        onChangeText = {(text) => setInputFields({...inputFields, streetName : text})}  
-                                            />  
-                                  <TextInput style={styles.input}
-                                        placeholder='City' 
-                                        value={inputFields.city}
-                                        onChangeText = {(text) => setInputFields({...inputFields, city : text})}
-                                            /> 
-                                  <TextInput style={styles.input}
-                                        placeholder='District' 
-                                        value={inputFields.district}
-                                        onChangeText = {(text) => setInputFields({...inputFields, district : text})}
-                                            /> 
+
+                  <View style={{flexDirection:"row"}}>
+                    <View style={{width:width*0.15}}>
+                      {/* <Text style={{marginLeft:10}}>Address</Text> */}
+                    </View>
+                    <View style={{width:width*0.8,flexDirection:"row",justifyContent:"space-around"}}>
+                    <TextInput style={styles.input}
+                                          placeholder='State' 
+                                          value={inputFields.state}
+                                          onChangeText = {(text) => setInputFields({...inputFields, state : text})}  
+                                              />  
+                                    <TextInput style={styles.input}
+                                          placeholder='Country' 
+                                          value={inputFields.country}
+                                          onChangeText = {(text) => setInputFields({...inputFields, country : text})}
+                                              /> 
+                                    <TextInput style={styles.input}
+                                          placeholder='Pincode' 
+                                          value={inputFields.pincode}
+                                          keyboardType='number-pad'
+                                          onChangeText = {(number) => setInputFields({...inputFields, pincode : number})}
+                                              /> 
+                    </View>
+
                   </View>
+
                 </View>
 
-                <View style={{flexDirection:"row"}}>
-                  <View style={{width:width*0.15}}>
-                    {/* <Text style={{marginLeft:10}}>Address</Text> */}
-                  </View>
-                  <View style={{width:width*0.8,flexDirection:"row",justifyContent:"space-around"}}>
-                  <TextInput style={styles.input}
-                                        placeholder='State' 
-                                        value={inputFields.state}
-                                        onChangeText = {(text) => setInputFields({...inputFields, state : text})}  
-                                            />  
-                                  <TextInput style={styles.input}
-                                        placeholder='Country' 
-                                        value={inputFields.country}
-                                        onChangeText = {(text) => setInputFields({...inputFields, country : text})}
-                                            /> 
-                                  <TextInput style={styles.input}
-                                        placeholder='Pincode' 
-                                        value={inputFields.pincode}
-                                        keyboardType='number-pad'
-                                        onChangeText = {(number) => setInputFields({...inputFields, pincode : number})}
-                                            /> 
-                  </View>
-
-                </View>
-
-              </View>
-
- {/* Emergency Address */}
-              <View style={{width:width*0.95}}>
+                <View style={{borderBottomColor:"#c0c0c0",borderBottomWidth:1.5,margin:15}}/>
+              
+    {/* Emergency Address */}
+                <View style={{width:width*0.95}}>
                           <View style={styles.columnContainer}>
                                   <View style={{width:width*0.65}}>
-                                      <View style={styles.rowContainer2}>
+                                      <View style={styles.rowContainer}>
                                           <Text> Emergency Contact</Text>
                                           <TextInput style={styles.input1}
                                                 placeholder='Name' 
@@ -625,7 +557,7 @@ const handlerPhoneNumber=(value)=>{
                                                 onChangeText = {(text) => setInputFields({...inputFields, emergencyName : text})}  
                                                     />  
                                       </View>
-                                      <View style={styles.rowContainer2}>
+                                      <View style={styles.rowContainer}>
                                           <Text> Email Id</Text>
                                           <TextInput style={styles.emailinput}
                                                 placeholder='Email Id' 
@@ -633,7 +565,7 @@ const handlerPhoneNumber=(value)=>{
                                                 onChangeText = {(text) => setInputFields({...inputFields, emergencyEmail : text})}  
                                                     />  
                                       </View>
-                                      <View style={styles.rowContainer2}>
+                                      <View style={styles.rowContainer}>
                                           <Text> Contact Number</Text>
                                           <TextInput style={styles.Contactinput1}
                                                 placeholder='Contact Number' 
@@ -641,7 +573,7 @@ const handlerPhoneNumber=(value)=>{
                                                 onChangeText = {(text) => setInputFields({...inputFields, emergencyNumber : text})}  
                                                     />  
                                       </View>
-                                      <View style={styles.rowContainer2}>
+                                      <View style={styles.rowContainer}>
                                           <Text> Relation</Text>
                                           <TextInput style={styles.emailinput}
                                                 placeholder='Email Id' 
@@ -676,90 +608,361 @@ const handlerPhoneNumber=(value)=>{
                           </View>
                 </View>
   </View>
+
+{/* Educational Details */}
+<View style={styles.personalDetailsContainer}>
+
+              <View style={styles.rowContainer}>
+                  <View style={styles.detailsView}>
+                    <View style={styles.details}>
+                      <Text style={styles.detailstext}>Educational Details</Text>
+                    </View>
+                    <TouchableOpacity>
+                      <FontAwesome5 name="edit" size={15} style={{alignSelf:"center",margin:3}}/>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.saveView}>
+                    <TouchableOpacity style={styles.savebtn}>
+                      <Text style={styles.savetext}>Save</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.cancelView}>
+                    <TouchableOpacity style={styles.cancelbtn}>
+                      <Text style={styles.canceltext}>Cancel</Text>
+                    </TouchableOpacity>
+                  </View>
+              </View>
+    {/* PG/UG */}
+    <View>
+                <View style={{width:width*0.95,left:5}}>
+                  <View style={styles.rowContainer}>
+                      <Text style={{top:5,left:3}}>PG/UG : </Text>
+                      <View style={styles.dropdownStatus}>
+                                <Dropdown
+                                  style={styles.input}
+                                  placeholder="Choose"
+                                  data={inputFields.degreeSelectOption}
+                                  labelField="label"
+                                  valueField="value"
+                                  value={inputFields.degreeSelect}
+                                  // onValueChange={(itemValue) => setFeeToParticipate(itemValue)}
+                                  onChange={(item) => {
+                                    setInputFields({...inputFields, degreeSelect : item.value})
+                                    // setWhatsappNotification(item.value);
+                                    console.log("selected", item);
+                                  }}
+                                />
+                            </View>   
+
+                       {inputFields.show2 && (
+                          <DatePicker
+                            testID="DatePicker"
+                            value={inputFields.date2}
+                            mode={inputFields.mode2}
+                            display="default"
+                            is24Hour={true}
+                            maximumDate={new Date()} // Disable future years
+                            onChange={onChange2}
+                          />
+                        )}
+                        {!inputFields.show2 && (
+                        <TouchableOpacity onPress={() => showMode2("date")} style={styles.inputbox2}>
+                              <Text style={styles.dateField}>{inputFields.text2}</Text>
+                            </TouchableOpacity>
+                        )}
+
+                  {inputFields.show3 && (
+                          <DatePicker
+                            testID="DatePicker"
+                            value={inputFields.date3}
+                            mode={inputFields.mode3}
+                            display="default"
+                            is24Hour={true}
+                            maximumDate={new Date()} // Disable future years
+                            onChange={onChange3}
+                          />
+                        )}
+                        {!inputFields.show3 && (
+                        <TouchableOpacity onPress={() => showMode3("date")} style={styles.inputbox3}>
+                              <Text style={styles.dateField}>{inputFields.text3}</Text>
+                            </TouchableOpacity>
+                        )}
+                  </View>
+                </View>
+
+                <View style={{width:width*0.95,paddingHorizontal:10}}>
+                  <View style={styles.rowContainer}>
+                      <Text> Name of the College: </Text>
+                      <TextInput style={styles.collegeNameinput}
+                            placeholder='College Name' 
+                            value={inputFields.collegeName}
+                            keyboardType='number-pad'
+                            onChangeText = {(text) => setInputFields({...inputFields, collegeName : text})}  
+                                />  
+                  </View>
+
+                  <View style={styles.rowContainer}>
+                      <Text> College Address: </Text>
+                      <TextInput style={styles.collegeAddressinput}
+                            placeholder='College Address' 
+                            value={inputFields.collegeAddress}
+                            keyboardType='number-pad'
+                            onChangeText = {(text) => setInputFields({...inputFields, collegeName : text})}  
+                                />  
+                  </View>
+                  
+                  <View style={styles.rowContainer}>
+                  <Text> Marks Gained: </Text>
+                      <TextInput style={styles.marksgainedinput}
+                            placeholder='Marks' 
+                            value={inputFields.collegeMarks}
+                            keyboardType='number-pad'
+                            onChangeText = {(number) => setInputFields({...inputFields, collegeMarks : number})}  
+                                />  
+                  <Text> Scale: </Text>
+                      <TextInput style={styles.marksgainedinput}
+                            placeholder='Scale' 
+                            value={inputFields.collegeScale}
+                            keyboardType='number-pad'
+                            onChangeText = {(number) => setInputFields({...inputFields, collegeScale : number})}  
+                                />  
+                  </View>
+
+                </View>
+
+                
+    </View>
+                <View style={{borderBottomColor:"#c0c0c0",borderBottomWidth:1.5,margin:15}}/>
+
+
+    {/* Intermediate/Diploma */}
+    <View>
+                <View style={{width:width*0.95,left:5}}>
+                  <View style={styles.rowContainer}>
+                      <Text style={{top:5,left:3}}>Intermediate / Diploma : </Text>
+                      <View style={styles.dropdownStatus}>
+                                <Dropdown
+                                  style={styles.input}
+                                  placeholder="Choose"
+                                  data={inputFields.interSelectOption}
+                                  labelField="label"
+                                  valueField="value"
+                                  value={inputFields.interSelect}
+                                  // onValueChange={(itemValue) => setFeeToParticipate(itemValue)}
+                                  onChange={(item) => {
+                                    setInputFields({...inputFields, interSelect : item.value})
+                                    // setWhatsappNotification(item.value);
+                                    console.log("selected", item);
+                                  }}
+                                />
+                            </View>   
+
+                       {inputFields.show4 && (
+                          <DatePicker
+                            testID="DatePicker"
+                            value={inputFields.date4}
+                            mode={inputFields.mode4}
+                            display="default"
+                            is24Hour={true}
+                            maximumDate={new Date()} // Disable future years
+                            onChange={onChange4}
+                          />
+                        )}
+                        {!inputFields.show4 && (
+                        <TouchableOpacity onPress={() => showMode4("date")} style={styles.inputbox2}>
+                              <Text style={styles.dateField}>{inputFields.text4}</Text>
+                            </TouchableOpacity>
+                        )}
+
+                  
+                  </View>
+                </View>
+
+                <View style={{width:width*0.95,paddingHorizontal:10}}>
+                  <View style={styles.rowContainer}>
+                      <Text> Name of the College: </Text>
+                      <TextInput style={styles.collegeinput2}
+                            placeholder='College Name' 
+                            value={inputFields.collegeName}
+                            keyboardType='number-pad'
+                            onChangeText = {(text) => setInputFields({...inputFields, collegeName : text})}  
+                                />  
+                      {inputFields.show5 && (
+                          <DatePicker
+                            testID="DatePicker"
+                            value={inputFields.date5}
+                            mode={inputFields.mode5}
+                            display="default"
+                            is24Hour={true}
+                            maximumDate={new Date()} // Disable future years
+                            onChange={onChange5}
+                          />
+                        )}
+                        {!inputFields.show5 && (
+                        <TouchableOpacity onPress={() => showMode5("date")} style={styles.inputbox3}>
+                              <Text style={styles.dateField}>{inputFields.text5}</Text>
+                            </TouchableOpacity>
+                        )}
+                  </View>
+
+<View style={{top:-8}}>
+                  <View style={styles.rowContainer}>
+                      <Text> College Address: </Text>
+                      <TextInput style={styles.collegeAddressinput}
+                            placeholder='College Address' 
+                            value={inputFields.interCollegeAddress}
+                            keyboardType='number-pad'
+                            onChangeText = {(text) => setInputFields({...inputFields, interCollegeAddress : text})}  
+                                />  
+                  </View>
+                  
+                  <View style={styles.rowContainer}>
+                  <Text> Marks Gained: </Text>
+                      <TextInput style={styles.marksgainedinput}
+                            placeholder='Marks' 
+                            value={inputFields.intermarks}
+                            keyboardType='number-pad'
+                            onChangeText = {(number) => setInputFields({...inputFields, intermarks : number})}  
+                                />  
+                  <Text> Scale: </Text>
+                      <TextInput style={styles.marksgainedinput}
+                            placeholder='Scale' 
+                            value={inputFields.interScale}
+                            keyboardType='number-pad'
+                            onChangeText = {(number) => setInputFields({...inputFields, interScale : number})}  
+                                />  
+                  </View>
 </View>
-</ScrollView>
+
+                </View>
+           
+
+                
+    </View>
+
+
+                  <View style={{borderBottomColor:"#c0c0c0",borderBottomWidth:1.5,margin:15}}/>
+
+
+{/* SSC / CBSE */}
+
+    <View>
+                <View style={{width:width*0.95,left:5}}>
+                  <View style={styles.rowContainer}>
+                      <Text style={{top:5,left:3}}>SSC/CBSE : </Text>
+                      <View style={styles.dropdownStatus}>
+                                <Dropdown
+                                  style={styles.schoolinputdropdown}
+                                  placeholder="Choose"
+                                  data={inputFields.schoolSelectOption}
+                                  labelField="label"
+                                  valueField="value"
+                                  value={inputFields.schoolSelect}
+                                  // onValueChange={(itemValue) => setFeeToParticipate(itemValue)}
+                                  onChange={(item) => {
+                                    setInputFields({...inputFields, schoolSelect : item.value})
+                                    // setWhatsappNotification(item.value);
+                                    console.log("selected", item);
+                                  }}
+                                />
+                            </View>   
+
+                       {inputFields.show6 && (
+                          <DatePicker
+                            testID="DatePicker"
+                            value={inputFields.date6}
+                            mode={inputFields.mode6}
+                            display="default"
+                            is24Hour={true}
+                            maximumDate={new Date()} // Disable future years
+                            onChange={onChange6}
+                          />
+                        )}
+                        {!inputFields.show6 && (
+                        <TouchableOpacity onPress={() => showMode6("date")} style={styles.inputbox2}>
+                              <Text style={styles.dateField}>{inputFields.text6}</Text>
+                            </TouchableOpacity>
+                        )}
+
+                  
+                  </View>
+                </View>
+
+                <View style={{width:width*0.95,paddingHorizontal:10}}>
+                  <View style={styles.rowContainer}>
+                      <Text> Name of the School: </Text>
+                      <TextInput style={styles.collegeinput2}
+                            placeholder='School Name' 
+                            value={inputFields.schoolName}
+                            onChangeText = {(text) => setInputFields({...inputFields, schoolName : text})}  
+                                />  
+                      {inputFields.show7 && (
+                          <DatePicker
+                            testID="DatePicker"
+                            value={inputFields.date7}
+                            mode={inputFields.mode7}
+                            display="default"
+                            is24Hour={true}
+                            maximumDate={new Date()} // Disable future years
+                            onChange={onChange7}
+                          />
+                        )}
+                        {!inputFields.show7 && (
+                        <TouchableOpacity onPress={() => showMode7("date")} style={styles.inputbox3}>
+                              <Text style={styles.dateField}>{inputFields.text7}</Text>
+                            </TouchableOpacity>
+                        )}
+                  </View>
+
+<View style={{top:-8}}>
+                  <View style={styles.rowContainer}>
+                      <Text> School Address: </Text>
+                      <TextInput style={styles.collegeAddressinput}
+                            placeholder='School Address' 
+                            value={inputFields.schoolAddress}
+                            onChangeText = {(text) => setInputFields({...inputFields, schoolAddress : text})}  
+                                />  
+                  </View>
+                  
+                  <View style={styles.rowContainer}>
+                  <Text> Marks Gained: </Text>
+                      <TextInput style={styles.marksgainedinput}
+                            placeholder='Marks' 
+                            value={inputFields.schoolmarks}
+                            keyboardType='number-pad'
+                            onChangeText = {(number) => setInputFields({...inputFields, schoolmarks : number})}  
+                                />  
+                  <Text> Scale: </Text>
+                      <TextInput style={styles.marksgainedinput}
+                            placeholder='Scale' 
+                            value={inputFields.schoolScale}
+                            keyboardType='number-pad'
+                            onChangeText = {(number) => setInputFields({...inputFields, schoolScale : number})}  
+                                />  
+                  </View>
+</View>
+
+                </View>
+           
+
+                
+    </View>
+
+
+</View>
+
+
+   
+
+    </ScrollView>
     </View>
   )
 }
 
-export default Profile
+export default ProfileDetails
 
 const styles = StyleSheet.create({
-  container1: {
-    backgroundColor:"#0384d5",
-    width:width,
-    height:height/6,
-    justifyContent:"center",
-    alignSelf:"center"
-  },
-  rowContainer:{
-    flexDirection:"row",
-    top:-40,
-    justifyContent:"flex-end",
-    marginRight:10
-
-  },
-  editContainer:{
-    backgroundColor:"white",
-    height:30,
-    width:30,
-    marginRight:10,
-    padding:3,
-    paddingLeft:5,
-    borderRadius:100
-  },
-  rowContainer1:{
-    flexDirection:"row",
-    top:-40,
-    marginRight:10,
-    marginBottom:10,
-    marginLeft:20,
-    width:width*0.8
-
-  },
-  editContainer1:{
-    backgroundColor:"#c0c0c0",
-    height:25,
-    width:25,
-    marginRight:10,
-    padding:3,
-    // paddingLeft:5,
-    borderRadius:100
-  },
-  editContainer2:{
-    backgroundColor:"#c0c0c0",
-    height:25,
-    width:25,
-    marginRight:10,
-    padding:3,
-    marginLeft:20,    
-    borderRadius:100
-  },
-  likeContainer:{
-    backgroundColor:"white",
-    height:30,
-    width:30,
-    borderRadius:100,
-    padding:3
-  },
-  imgView:{
-    height:120,
-    width:120,
-    backgroundColor:"#0384d5",
-    borderRadius:100,
-    alignSelf:"center",
-    top:-80,
-    borderWidth:5
-  },
-  img:{
-    height:110,
-    width:110,
-    backgroundColor:"#0384d5",
-    borderRadius:100,
-    alignSelf:"center",
-    top:5
-  },
-  detailsContainer:{
+  personalDetailsContainer:{
     width:width*0.95,
     height:"auto",
     borderRadius:10,
@@ -767,11 +970,9 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     elevation:5,
     paddingBottom:10,
-    marginBottom:20,
-    marginTop:30
-
-  },
-  rowContainer2:{
+    marginBottom:20 
+ },
+  rowContainer:{
     flexDirection:"row",
     justifyContent:"space-evenly",
     marginTop:10
@@ -833,7 +1034,7 @@ const styles = StyleSheet.create({
   },
   input:{
       height:25,
-      width:width*0.4,
+      width:width*0.24,
       paddingHorizontal:5,
       borderColor:"black",
       borderWidth:0.3,

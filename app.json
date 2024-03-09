@@ -22,14 +22,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.oxyloans.LLT"
+      "package": "com.llt.oversea"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "e98b096a-cce0-4614-8237-0dbc7e7795eb"
+        "projectId": "3a9e33c2-cf4e-4b02-94e2-6a1bdf2b5506"
       }
     }
   }
