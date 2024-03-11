@@ -15,7 +15,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as Progress from "react-native-progress";
 import PhoneInput from "react-native-phone-number-input";
-import { RadioButton, Button } from "react-native-paper";
+import { RadioButton, Button, Checkbox } from "react-native-paper";
 import DatePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-element-dropdown";
 
@@ -59,9 +59,9 @@ const Profile = () => {
     collegeAddress: "",
     collegeMarks: "",
     collegeScale: "",
-				collegeStartDate:"",
+				collegeStartDate:"Start from",
 				showCollegeStartDate:false,
-				collegeEndDate:"",
+				collegeEndDate:"End to",
 				showCollegeEndDate:false,
 
 				interSelect: "",
@@ -73,9 +73,9 @@ const Profile = () => {
     interCollegeAddress: "",
 				intermarks: "",
     interScale: "",
-				interStartDate:"",
-				showInterDate:false,
-				interEndDate:"",
+				interStartDate:"Start from",
+				showInterStartDate:false,
+				interEndDate:"End to",
 				showInterEndDate:false,
 
 				schoolSelect: "",
@@ -87,12 +87,28 @@ const Profile = () => {
     schoolAddress: "",
 				schoolmarks: "",
     schoolScale: "",
-				schoolStartDate:"",
+				schoolStartDate:"Start from",
 				showSchoolStartDate:false,
-				schoolEndDate:"",
-				showSchoolEndDate:false
+				schoolEndDate:"End to",
+				showSchoolEndDate:false,
+
+        clientName:"",
+        jobRole:"",
+        jobStart:"Start from",
+        showJobStart:false,
+        jobEnd:"End to",
+        showJobEnd:false,
+
+        additionClientName:"",
+        additionJobRole:"",
+        additionJobStart:"Start from",
+        showAdditionJobStart:false,
+        additionJobEnd:"End to",
+        showAdditionJobEnd:false
+
 
   });
+  const [options,setOptions] = useState([])
 
   const handlePhoneNumberChange = (value) => {
     try {
@@ -384,6 +400,130 @@ const showSchoolEndDateMode = (currentMode) => {
 	// setInputFields({...inputFields,})
 };
 
+// Job Start
+const onChangeJobStartDate = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showJobStart: Platform.OS === "ios",
+			date: currentDate,
+			jobStart: fDate,
+	});
+};
+const showJobStartDateMode = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showJobStart: !inputFields.showJobStart,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+
+// job End
+const onChangeJobEndDate = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showJobEnd: Platform.OS === "ios",
+			date: currentDate,
+			jobEnd: fDate,
+	});
+};
+const showJobEndDateMode = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showJobEnd: !inputFields.showJobEnd,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+
+//Addition Job Start
+const onChangeAdditionJobStartDate = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showAdditionJobStart: Platform.OS === "ios",
+			date: currentDate,
+			additionJobStart: fDate,
+	});
+};
+const showAdditionJobStartDateMode = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showAdditionJobStart: !inputFields.showAdditionJobStart,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+
+//Addition job End
+const onChangeAdditionJobEndDate = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showAdditionJobEnd: Platform.OS === "ios",
+			date: currentDate,
+			additionJobEnd: fDate,
+	});
+};
+const showAdditionJobEndDateMode = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showAdditionJobEnd: !inputFields.showAdditionJobEnd,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+
+// checked options
+const handleCheckboxChange = (value) => {
+  if (options.includes(value)) {
+    setOptions(options.filter(item => item !== value));
+  } else {
+    setOptions([...options, value]);
+  }
+};
 
   return (
     <View>
@@ -559,7 +699,7 @@ const showSchoolEndDateMode = (currentMode) => {
                   defaultValue={inputFields.phoneNumber}
                   defaultCode="IN"
                   layout="first"
-                  autoFocus
+                  // autoFocus
                   onChangeText={handlePhoneNumberChange}
                 />
 
@@ -585,11 +725,11 @@ const showSchoolEndDateMode = (currentMode) => {
                 />
 
                 <View style={styles.rowContainer4}>
-                  <View style={styles.rowContainer5}>
-                    <View style={{ alignSelf: "center" }}>
-                      <Text> Marital Status</Text>
+                  <View style={styles.rowContainer6}>
+                    <View style={{ alignSelf: "center"}}>
+                      <Text>Marital Status</Text>
                     </View>
-                    <View style={{ alignSelf: "center" }}>
+                    <View style={{  }}>
                       <RadioButton.Group
                         onValueChange={(value) =>
                           setInputFields({
@@ -604,11 +744,12 @@ const showSchoolEndDateMode = (currentMode) => {
                             value="YES"
                             default="true"
                             color="#007AFF"
+                            style={{left:-30,right:-16}}
                           />
                           <Text
                             style={{
                               alignSelf: "center",
-                              left: -3,
+                              left: -4,
                               fontWeight: "800",
                               fontSize: 16,
                             }}
@@ -619,7 +760,7 @@ const showSchoolEndDateMode = (currentMode) => {
                           <Text
                             style={{
                               alignSelf: "center",
-                              left: -3,
+                              left: -4,
                               fontWeight: "800",
                               fontSize: 16,
                             }}
@@ -868,6 +1009,7 @@ const showSchoolEndDateMode = (currentMode) => {
             </View>
           </View>
 
+                    {/* Education Details */}
           <View>
             <View style={styles.detailsContainer}>
               <View style={styles.rowContainer2}>
@@ -917,7 +1059,7 @@ const showSchoolEndDateMode = (currentMode) => {
 																</View>
 																<View style={{alignSelf:"center",top:1}}>
 													    	<Dropdown
-																				style={{width:width*0.3,paddingHorizontal:15}}
+																				style={{width:width*0.4,paddingHorizontal:15}}
 																				inputSearchStyle={{fontSize:18}}
 																				iconStyle={{width:30,height:30}}
 																				selectedTextStyle={{fontSize:18}}
@@ -1049,11 +1191,11 @@ const showSchoolEndDateMode = (currentMode) => {
 																</View>
 																<View style={{alignSelf:"center",top:1}}>
 													    	<Dropdown
-																				style={{width:width*0.3,paddingHorizontal:15}}
-																				inputSearchStyle={{fontSize:18}}
+																				style={{width:width*0.6,paddingHorizontal:15}}
+																				inputSearchStyle={{fontSize:16}}
 																				iconStyle={{width:30,height:30}}
-																				selectedTextStyle={{fontSize:18}}
-                    placeholder="PG or UG"
+																				selectedTextStyle={{fontSize:16,width:width*0.4}}
+                    placeholder="Intermediate or Diploma"
                     data={inputFields.interSelectOption}
                     labelField="label"
                     valueField="value"
@@ -1062,7 +1204,7 @@ const showSchoolEndDateMode = (currentMode) => {
                     onChange={(item) => {
                       setInputFields({
                         ...inputFields,
-                        degreeSelect: item.value,
+                        interSelect: item.value,
                       });
                       // setWhatsappNotification(item.value);
                       console.log("selected", item);
@@ -1085,7 +1227,7 @@ const showSchoolEndDateMode = (currentMode) => {
                       />
                     )}
                     <TouchableOpacity
-                      onPress={() => showInterStartDate("date")}
+                      onPress={() => showInterStartDateMode("date")}
                       style={styles.dateInput}
                     >
                       <View
@@ -1172,8 +1314,414 @@ const showSchoolEndDateMode = (currentMode) => {
                     }
                   />
                 </View>
+         
+                 {/* School  Life */}
+
+                <View style={styles.emailinput}>
+															<View style={{flexDirection:"row",justifyContent:"space-between"}}>
+															 <View style={{alignSelf:"center",top:1}}>
+																	<Text style={{fontSize:18}}>Study Level</Text>
+																</View>
+																<View style={{alignSelf:"center",top:1}}>
+													    	<Dropdown
+																				style={{width:width*0.5,paddingHorizontal:15}}
+																				inputSearchStyle={{fontSize:16}}
+																				iconStyle={{width:30,height:30}}
+																				selectedTextStyle={{fontSize:16,width:width*0.4}}
+                    placeholder="SSC or CBSC"
+                    data={inputFields.interSelectOption}
+                    labelField="label"
+                    valueField="value"
+                    value={inputFields.schoolSelect}
+                    // onValueChange={(itemValue) => setFeeToParticipate(itemValue)}
+                    onChange={(item) => {
+                      setInputFields({
+                        ...inputFields,
+                        schoolSelect: item.value,
+                      });
+                      // setWhatsappNotification(item.value);
+                      console.log("selected", item);
+                    }}
+                   />
+																	</View>
+																</View>
+               </View> 
+															<View style={styles.rowContainer3}>
+                  <View style={styles.input}>
+                    {inputFields.showSchoolStartDate && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeSchoolStartDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showSchoolStartDateMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 8,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.schoolStartDate}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.input}>
+                    {inputFields.showSchoolEndDate && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeSchoolEndDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showSchoolEndDateMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 8,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.schoolEndDate}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+																<TextInput
+                  style={styles.emailinput}
+                  placeholder="Name of the school"
+                  value={inputFields.schoolName}
+                  onChange={(text) =>
+                    setInputFields({ ...inputFields, schoolName: text })
+                  }
+                />
+																<TextInput
+                  style={styles.emailinput}
+                  placeholder="School Address"
+                  value={inputFields.schoolAddress}
+                  onChange={(text) =>
+                    setInputFields({ ...inputFields, schoolAddress: text })
+                  }
+                />
+																 <View style={styles.rowContainer3}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Marks gained"
+                    value={inputFields.schoolmarks}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, schoolmarks: text })
+                    }
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Scale"
+                    value={inputFields.schoolScale}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, schoolScale: text })
+                    }
+                  />
+                </View>
+                <View style={styles.btn}>
+                  <TouchableOpacity style={styles.savebtn}>
+                    <Text style={styles.saveText}>Save</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.cancelbtn}>
+                    <Text style={styles.saveText}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
             </View>
           </View>
+
+          {/* Work experience */}
+
+          <View>
+            <View style={styles.detailsContainer}>
+              <View style={styles.rowContainer2}>
+                <View style={styles.detailsView}>
+                  <View style={styles.details}>
+                    <Text style={styles.detailstext}>Work Experience</Text>
+                  </View>
+
+                  <Progress.Bar
+                    progress={0.5}
+                    width={width * 0.42}
+                    color="#0384d5"
+                    borderColor="#c0c0c0"
+                    height={15}
+                    style={styles.progressBar}
+                  />
+
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text}>45% completed</Text>
+                  </View>
+
+                  <TouchableOpacity>
+                    <FontAwesome5
+                      name="eye"
+                      size={15}
+                      color="#808080"
+                      style={{ alignSelf: "center", margin: 3 }}
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity>
+                    <FontAwesome5
+                      name="edit"
+                      size={15}
+                      color="#808080"
+                      style={{ alignSelf: "center", margin: 3 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <TextInput
+                  style={styles.emailinput}
+                  placeholder="Client Name"
+                  value={inputFields.clientName}
+                  onChange={(text) =>
+                    setInputFields({ ...inputFields, clientName: text })
+                  }
+                />
+                <TextInput
+                  style={styles.emailinput}
+                  placeholder="Job Role"
+                  value={inputFields.jobRole}
+                  onChange={(text) =>
+                    setInputFields({ ...inputFields, jobRole: text })
+                  }
+                />
+
+<View style={styles.rowContainer3}>
+                  <View style={styles.input}>
+                    {inputFields.showJobStart && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeJobStartDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showJobStartDateMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 8,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.jobStart}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.input}>
+                    {inputFields.showJobEnd && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeJobEndDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showJobEndDateMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 8,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.jobEnd}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.emailinput}>
+                  <View style={{flexDirection:"row"}}>
+                    <Checkbox.Item  
+                    onPress={() => handleCheckboxChange('option1')} 
+                    style={{top:-4}}
+                    status={options.includes('option1') ? 'checked' : 'unchecked'}/>  
+                    <Text style={{top:10,fontSize:16}}>Do you need VISA Counselling</Text>
+                   </View>
+                </View>
+                <View style={styles.emailinput}>
+                  <View style={{flexDirection:"row"}}>
+                    <Checkbox.Item  
+                    onPress={() => handleCheckboxChange('option2')} 
+                    style={{top:-4}}
+                    status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                    <Text style={{top:10,fontSize:16}}>Looking for a Loan</Text>
+                   </View>
+                </View>
+                <View style={styles.emailinput}>
+                  <View style={{flexDirection:"row"}}>
+                    <Checkbox.Item  
+                    onPress={() => handleCheckboxChange('option3')} 
+                    style={{top:-4}}
+                    status={options.includes('option3') ? 'checked' : 'unchecked'}/>  
+                    <Text style={{top:10,fontSize:16}}>Already in a Loan</Text>
+                   </View>
+                </View>
+                <View style={styles.emailinput}>
+                  <View style={{flexDirection:"row"}}>
+                    <Checkbox.Item  
+                    onPress={() => handleCheckboxChange('option4')} 
+                    style={{top:-4}}
+                    status={options.includes('option4') ? 'checked' : 'unchecked'}/>  
+                    <Text style={{top:10,fontSize:16}}>Not Interested</Text>
+                   </View>
+                </View>
+                <View style={{borderWidth:1,marginTop:40}}/>
+                      <View style={{width:width*0.8,alignSelf:"center",height:35,backgroundColor:"white",elevation:6,justifyContent:"center",borderRadius:20,top:-20}}><Text style={{color:"#0384d5",fontWeight:"bold",textAlign:"center"}}>Do you have any other job experience?</Text></View>
+                      <View style={{alignSelf:"flex-end",marginRight:10}}>
+                        <Text style={{fontWeight:"500"}}>If you have any addition experience?</Text>
+                      </View>
+                      <TextInput
+                  style={styles.emailinput}
+                  placeholder="Client Name"
+                  value={inputFields.clientName}
+                  onChange={(text) =>
+                    setInputFields({ ...inputFields, clientName: text })
+                  }
+                />
+                <TextInput
+                  style={styles.emailinput}
+                  placeholder="Job Role"
+                  value={inputFields.jobRole}
+                  onChange={(text) =>
+                    setInputFields({ ...inputFields, jobRole: text })
+                  }
+                />
+
+<View style={styles.rowContainer3}>
+                  <View style={styles.input}>
+                    {inputFields.showAdditionJobStart && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeAdditionJobStartDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showAdditionJobStartDateMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 8,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.additionJobStart}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.input}>
+                    {inputFields.showAdditionJobEnd && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeAdditionJobEndDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showAdditionJobEndDateMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 8,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.additionJobEnd}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.btn}>
+                  <TouchableOpacity style={styles.savebtn}>
+                    <Text style={styles.saveText}>Save</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.cancelbtn}>
+                    <Text style={styles.saveText}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
+
+            </View>
+          </View>
+
         </SafeAreaView>
       </ScrollView>
     </View>
@@ -1258,7 +1806,7 @@ const styles = StyleSheet.create({
     width: width * 0.95,
     alignSelf: "center",
     height: "auto",
-				marginBottom:20
+		marginBottom:20
   },
   rowContainer2: {
     flexDirection: "row",
@@ -1354,11 +1902,19 @@ const styles = StyleSheet.create({
   },
   rowContainer5: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     borderColor: "#c0c0c0",
     borderWidth: 1,
     borderRadius: 5,
-    width: width * 0.42,
+    width: width * 0.387,
+  },
+  rowContainer6: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    borderColor: "#c0c0c0",
+    borderWidth: 1,
+    borderRadius: 5,
+    width: width * 0.49,
   },
   dateField: {
     fontSize: 16,
@@ -1396,6 +1952,7 @@ const styles = StyleSheet.create({
     // justifyContent:"space-around",
     marginTop: 10,
     width: width * 0.45,
+    marginBottom:20
   },
   cancelbtn: {
     width: 80,

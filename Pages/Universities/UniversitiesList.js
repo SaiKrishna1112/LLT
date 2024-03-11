@@ -1,6 +1,8 @@
 import React from "react";
 import {View,Text,StyleSheet,Dimensions, TouchableOpacity, ScrollView,FlatList} from "react-native";
 import {useNavigation,useRoute} from '@react-navigation/native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const { height, width } = Dimensions.get("window" || "screen");	
 
@@ -115,10 +117,10 @@ const UniversitiesList =()=>{
 					 </View>
 					 <View style={styles.bottom}>
 						 <TouchableOpacity style={styles.hStyle}>
-							 <Text style={styles.txt2}>H</Text>
+						   <MaterialCommunityIcons name={"heart"} size={22} color={"white"}/>
 						 </TouchableOpacity>
 						 <TouchableOpacity style={styles.hStyle}>
-							 <Text style={styles.txt2}>M</Text>
+						   <MaterialCommunityIcons name={"chat"} size={22} color={"white"}/>
 						 </TouchableOpacity>
 					 </View>
 				 </View>
@@ -190,7 +192,8 @@ const styles = StyleSheet.create({
 	},
 	txtLine:{
 		flexDirection:"row",
-		width:width*0.45
+		width:width*0.45,
+		
 	},
 	iconCircle:{
 		width:20,
@@ -253,14 +256,13 @@ const styles = StyleSheet.create({
 	hStyle:{
 		width:40,
 		height:25,
-		backgroundColor:"white",
+		backgroundColor:"#0384d5",
 		alignItems:"center",
 		justifyContent:"center",
 		elevation:4,
 		marginLeft:5,
 		marginRight:10,
 		marginTop:15,
-		backgroundColor:"blue"
 	},
 	
 })

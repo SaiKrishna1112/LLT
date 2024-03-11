@@ -120,9 +120,9 @@ const Dashboard = () => {
                 </View>
              </Animated.View>
         </View>
-        <View style={{marginTop:20,alignSelf:"center",backgroundColor:"white",elevation:8,width:width*0.95,borderRadius:20,padding:20}}>
+        <View style={{marginTop:20,alignSelf:"center",backgroundColor:"white",elevation:8,width:width*0.85,borderRadius:20,padding:10}}>
             <View style={{flexDirection:"row",marginTop:5,marginLeft:20,marginBottom:20}}>
-              <View style={{alignItems:"flex-start",width:width*0.7}}>
+              <View style={{alignItems:"flex-start",width:width*0.63}}>
                 <Text style={{fontSize:19,fontWeight:"600"}}>Total Universities</Text>
               </View>
               <View style={{alignItems:"flex-end"}}>
@@ -137,8 +137,8 @@ const Dashboard = () => {
             noOfSections={8}
             maxValue={400}
             data={barData}
-            barWidth={43}
-            sideWidth={15}
+            barWidth={38}
+            sideWidth={14}
             isThreeD 
             isAnimated
             side="right"

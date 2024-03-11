@@ -10,10 +10,11 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-const { height, width } = Dimensions.get("window");
-import { RadioButton, Button } from "react-native-paper";
+import { RadioButton, Button, Checkbox } from "react-native-paper";
 import DatePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-element-dropdown";
+
+const { height, width } = Dimensions.get("window");
 
 const ProfileDetails = () => {
   const [inputFields, setInputFields] = useState({
