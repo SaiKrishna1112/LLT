@@ -16,7 +16,7 @@ export default function Navigation(){
     return (
       
                 <Stack.Navigator
-                //    initialRouteName="Tabs"
+                   initialRouteName="Login"
                             screenOptions = {{
                                 headerTintColor: 'white',
                                 headerTitleStyle: styles.headerTitleStyle,

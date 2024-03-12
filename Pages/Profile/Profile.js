@@ -13,6 +13,8 @@ import {
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Octicon from "react-native-vector-icons/Octicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import * as Progress from "react-native-progress";
 import PhoneInput from "react-native-phone-number-input";
 import { RadioButton, Button, Checkbox } from "react-native-paper";
@@ -104,7 +106,27 @@ const Profile = () => {
         additionJobStart:"Start from",
         showAdditionJobStart:false,
         additionJobEnd:"End to",
-        showAdditionJobEnd:false
+        showAdditionJobEnd:false,
+
+        select:1,
+        Listening:"",
+        Speaking:"",
+        Writing:"",
+        Reading:"",
+        DateofExamination:"Examination Date",
+        showDateOfExam:false,
+        TextValidUntil:"Text valid until",
+        showTextValidUntil:false,
+        overAllScore:"",
+
+        Verbal:"",
+        AWA:"",
+        Quant:"",
+        DateofExamination1:"Examination Date",
+        showDateOfExam1:false,
+        TextValidUntil1:"Text valid until",
+        showTextValidUntil1:false,
+        overAllScore1:"",
 
 
   });
@@ -510,6 +532,120 @@ const showAdditionJobEndDateMode = (currentMode) => {
 	setInputFields({
 			...inputFields,
 			showAdditionJobEnd: !inputFields.showAdditionJobEnd,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+
+//Date Of Examination
+const onChangeDateofExamDate = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showDateOfExam: Platform.OS === "ios",
+			date: currentDate,
+			DateofExamination: fDate,
+	});
+};
+const showDateofExamMode = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showDateOfExam: !inputFields.showDateOfExam,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+// Text valid until
+const onChangeTestofExamDate = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showTextValidUntil: Platform.OS === "ios",
+			date: currentDate,
+			TextValidUntil: fDate,
+	});
+};
+const showTestofExamMode = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showTextValidUntil: !inputFields.showTextValidUntil,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+
+//Date Of Examination
+const onChangeDateofExamDate1 = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showDateOfExam1: Platform.OS === "ios",
+			date: currentDate,
+			DateofExamination1: fDate,
+	});
+};
+const showDateofExamMode1 = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showDateOfExam1: !inputFields.showDateOfExam1,
+			mode: currentMode,
+	});
+	// setMode(currentMode);
+	// setInputFields({...inputFields,})
+};
+// Text valid until
+const onChangeTestofExamDate1 = (event, selectDate) => {
+	const currentDate = selectDate || inputFields.date;
+
+	let tempDate = new Date(currentDate);
+	let fDate =
+			tempDate.getDate() +
+			"/" +
+			(tempDate.getMonth() + 1) +
+			"/" +
+			tempDate.getFullYear();
+	setInputFields({
+			...inputFields,
+			showTextValidUntil1: Platform.OS === "ios",
+			date: currentDate,
+			TextValidUntil1: fDate,
+	});
+};
+const showTestofExamMode1 = (currentMode) => {
+	// setShow(!show);
+	setInputFields({
+			...inputFields,
+			showTextValidUntil1: !inputFields.showTextValidUntil1,
 			mode: currentMode,
 	});
 	// setMode(currentMode);
@@ -1722,6 +1858,364 @@ const handleCheckboxChange = (value) => {
             </View>
           </View>
 
+          {/* Test Scores */}
+          <View>
+            <View style={styles.detailsContainer}>
+              <View style={styles.rowContainer2}>
+                <View style={styles.detailsView}>
+                  <View style={styles.details}>
+                    <Text style={styles.detailstext}>Test Scores</Text>
+                  </View>
+
+                  <Progress.Bar
+                    progress={0.5}
+                    width={width * 0.42}
+                    color="#0384d5"
+                    borderColor="#c0c0c0"
+                    height={15}
+                    style={styles.progressBar}
+                  />
+
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text}>45% completed</Text>
+                  </View>
+
+                  <TouchableOpacity>
+                    <FontAwesome5
+                      name="eye"
+                      size={15}
+                      color="#808080"
+                      style={{ alignSelf: "center", margin: 3 }}
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity>
+                    <FontAwesome5
+                      name="edit"
+                      size={15}
+                      color="#808080"
+                      style={{ alignSelf: "center", margin: 3 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.btnBarStyle}>
+                  <TouchableOpacity onPress={()=>setInputFields({...inputFields,select:1})} style={inputFields.select==1? styles.buttonActive: styles.buttonDeactive}> 
+                    <Text style={inputFields.select==1? styles.buttonActiveTxt: styles.buttonDeactiveTxt}>IELTS</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={()=>setInputFields({...inputFields,select:2})} style={inputFields.select==2? styles.buttonActive: styles.buttonDeactive}>
+                    <Text style={inputFields.select==2? styles.buttonActiveTxt: styles.buttonDeactiveTxt}>TOEFL</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={()=>setInputFields({...inputFields,select:3})} style={inputFields.select==3? styles.buttonActive: styles.buttonDeactive}>
+                    <Text style={inputFields.select==3? styles.buttonActiveTxt: styles.buttonDeactiveTxt}>PTE</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={()=>setInputFields({...inputFields,select:4})} style={inputFields.select==4? styles.buttonActive: styles.buttonDeactive}>
+                    <Text style={inputFields.select==4? styles.buttonActiveTxt: styles.buttonDeactiveTxt}>Duolingo</Text>
+                  </TouchableOpacity>
+              </View>
+                  
+              <View style={styles.rowContainer3}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Listening"
+                    value={inputFields.Listening}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, Listening: text })
+                    }
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Speaking"
+                    value={inputFields.Speaking}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, Speaking: text })
+                    }
+                  />
+                </View>
+
+                <View style={styles.rowContainer3}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Writing"
+                    value={inputFields.Writing}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, Writing: text })
+                    }
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Reading"
+                    value={inputFields.Reading}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, Reading: text })
+                    }
+                  />
+                </View>
+
+                <View style={styles.rowContainer3}>
+                  <View style={styles.input}>
+                    {inputFields.showDateOfExam && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeDateofExamDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showDateofExamMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 4,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.DateofExamination}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.input}>
+                    {inputFields.showTextValidUntil && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeTestofExamDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showTestofExamMode("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 4,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.TextValidUntil}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+                <TextInput
+                  style={styles.emailinput}
+                  placeholder="Over all score"
+                  value={inputFields.overAllScore}
+                  onChange={(text) =>
+                    setInputFields({ ...inputFields, overAllScore: text })
+                  }
+                />
+
+                <View style={styles.btnGRE}>
+                    <Text style={{textAlign:"center",fontSize:20,fontWeight:"bold",color:"white"}}>GRE</Text>
+                </View>
+
+                <View style={styles.rowContainer3}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Verbal"
+                    value={inputFields.Verbal}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, Verbal: text })
+                    }
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="AWA"
+                    value={inputFields.AWA}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, AWA: text })
+                    }
+                  />
+                </View>
+
+                <View style={styles.rowContainer3}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Quant"
+                    value={inputFields.Quant}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, Quant: text })
+                    }
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Over all score"
+                    value={inputFields.overAllScore1}
+                    onChange={(text) =>
+                      setInputFields({ ...inputFields, overAllScore1: text })
+                    }
+                  />
+                </View>
+
+                <View style={styles.rowContainer3}>
+                  <View style={styles.input}>
+                    {inputFields.showDateOfExam1 && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeDateofExamDate1}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showDateofExamMode1("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 4,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.DateofExamination1}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -10 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.input}>
+                    {inputFields.showTextValidUntil1 && (
+                      <DatePicker
+                        testID="DatePicker"
+                        value={inputFields.date}
+                        mode={inputFields.mode}
+                        display="default"
+                        is24Hour={true}
+                        maximumDate={new Date()} // Disable future years
+                        onChange={onChangeTestofExamDate1}
+                      />
+                    )}
+                    <TouchableOpacity
+                      onPress={() => showTestofExamMode1("date")}
+                      style={styles.dateInput}
+                    >
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          left: 4,
+                          justifyItem: "center",
+                        }}
+                      >
+                        <Text style={styles.dateField}>
+                          {inputFields.TextValidUntil1}
+                        </Text>
+                      </View>
+                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                        <FontAwesome5 name={"calendar-alt"} size={18} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+                <View style={styles.btn}>
+                  <TouchableOpacity style={styles.savebtn}>
+                    <Text style={styles.saveText}>Save</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.cancelbtn}>
+                    <Text style={styles.saveText}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
+
+            </View>
+          </View>
+
+          {/* Documents  */}
+
+          <View>
+            <View style={styles.detailsContainer}>
+              <View style={styles.rowContainer2}>
+                <View style={styles.detailsView}>
+                  <View style={styles.details}>
+                    <Text style={styles.detailstext}>Documents</Text>
+                  </View>
+
+                  <Progress.Bar
+                    progress={0.5}
+                    width={width * 0.42}
+                    color="#0384d5"
+                    borderColor="#c0c0c0"
+                    height={15}
+                    style={styles.progressBar}
+                  />
+
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text}>45% completed</Text>
+                  </View>
+
+                  <TouchableOpacity>
+                    <FontAwesome5
+                      name="eye"
+                      size={15}
+                      color="#808080"
+                      style={{ alignSelf: "center", margin: 3 }}
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity>
+                    <FontAwesome5
+                      name="edit"
+                      size={15}
+                      color="#808080"
+                      style={{ alignSelf: "center", margin: 3 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.fileUploadStyle}>
+                <View style={styles.iconStyleFile}>
+                     
+                </View>
+                <View style={{top:8,paddingLeft:10}}>
+                     <Text >Release Group_20230382.xlsx</Text>
+                </View>
+                <View style={{top:8,paddingLeft:20}}>
+                        <Octicon name={"download"} size={20}/>
+                </View>
+                <View style={{top:6,paddingLeft:10}}>
+                        <MaterialCommunityIcons name={"dots-horizontal"} size={24}/>
+                </View>
+                <View style={{paddingLeft:10,width:40,height:20,backgroundColor:"blue",alignSelf:"center"}}>
+                   
+                </View>
+              </View>
+            </View>
+          </View>
+
         </SafeAreaView>
       </ScrollView>
     </View>
@@ -1966,4 +2460,71 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginLeft: 25,
   },
+  btnBarStyle:{
+    flexDirection:"row",
+		backgroundColor:"white",
+		borderRadius:5,
+		width:width*0.85,
+		alignSelf:"center",
+		margin:20,
+		height:35,
+		elevation:5,
+		alignItems:"center"
+  },
+  buttonActive:{
+		backgroundColor:"#0384d5",
+		width:width*0.215,
+		height:35,
+		borderRadius:5,
+		alignItems:"center",
+		justifyContent:"center"
+	},
+	buttonActiveTxt:{
+		color:"white",
+		alignSelf:"center",
+		fontWeight:"bold"
+
+	},
+	buttonDeactive:{
+		backgroundColor:"white",
+		width:width*0.215,
+		height:35,
+		borderRadius:5,
+		alignItems:"center",
+		justifyContent:"center"
+	},
+	buttonDeactiveTxt:{
+		color:"black"
+	},
+  btnGRE:{
+    width:width*0.25,
+    height:40,
+    elevation:10,
+    backgroundColor:"#0384d5",
+    margin:20,
+    borderColor:"white",
+    borderWidth:5,
+    borderRadius:10,
+    justifyContent:"center"
+  },
+  fileUploadStyle:{
+    width:width*0.88,
+    height:35,
+    elevation:10,
+    backgroundColor:"white",
+    alignSelf:"center",
+    margin:10,
+    marginTop:20,
+    borderRadius:10,
+    flexDirection:"row",
+    // justifyContent:"center"
+  },
+  iconStyleFile:{
+    width:width*0.1,
+    height:38,
+    elevation:10,
+    backgroundColor:"white",
+    borderRadius:10,
+    top:-2
+  }
 });

@@ -11,14 +11,8 @@ import UniversitiesList from '../Pages/Universities/UniversitiesList';
 import UniversitiesListAndChat from '../Pages/Chat/UniversitiesListAndChat';
 import ApplicationScreen from '../Pages/Application/ApplicationScreen';
 import SearchbarBox from '../components/Header'
+import Loans from '../Pages/LoansScreen/Loans';
 
-function Loan() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Loan!</Text>
-    </View>
-  );
-}
 
 function Menu() {
   return (
@@ -134,7 +128,7 @@ const LoanStack=()=>(
       fontWeight:"bold"
     }
   }}>
-    <LoanScreen.Screen name = "Loans" component={Loan} options={{
+    <LoanScreen.Screen name = "Loans" component={Loans} options={{
       headerTitle: (props) => <SearchbarBox/>,
       // headerRight:(props)=><IconView />
   }}/>
