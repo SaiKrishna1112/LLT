@@ -2203,15 +2203,70 @@ const handleCheckboxChange = (value) => {
                 <View style={{top:8,paddingLeft:10}}>
                      <Text >Release Group_20230382.xlsx</Text>
                 </View>
-                <View style={{top:8,paddingLeft:20}}>
+                <View style={{top:8,paddingLeft:15}}>
                         <Octicon name={"download"} size={20}/>
                 </View>
-                <View style={{top:6,paddingLeft:10}}>
+                <View style={{top:6,paddingLeft:5}}>
                         <MaterialCommunityIcons name={"dots-horizontal"} size={24}/>
                 </View>
-                <View style={{paddingLeft:10,width:40,height:20,backgroundColor:"blue",alignSelf:"center"}}>
-                   
+                <View style={styles.fileBoxStyle}>
+                   <Text style={{textAlign:"center",fontWeight:"700",color:"white"}}>SOP</Text>
                 </View>
+              </View>
+
+              <View style={styles.fileUploadStyle}>
+                <View style={styles.iconStyleFile}>
+                     
+                </View>
+                <View style={{top:8,paddingLeft:10}}>
+                     <Text >Release Group_20230382.xlsx</Text>
+                </View>
+                <View style={{top:8,paddingLeft:15}}>
+                        <Octicon name={"download"} size={20}/>
+                </View>
+                <View style={{top:6,paddingLeft:5}}>
+                        <MaterialCommunityIcons name={"dots-horizontal"} size={24}/>
+                </View>
+                <View style={styles.fileBoxStyle}>
+                   <Text style={{textAlign:"center",fontWeight:"700",color:"white"}}>SOP</Text>
+                </View>
+              </View>
+
+              <View style={styles.fileUploadStyle}>
+                <View style={styles.iconStyleFile}>
+                     
+                </View>
+                <View style={{top:8,paddingLeft:10}}>
+                     <Text >Release Group_20230382.xlsx</Text>
+                </View>
+                <View style={{top:8,paddingLeft:15}}>
+                        <Octicon name={"download"} size={20}/>
+                </View>
+                <View style={{top:6,paddingLeft:5}}>
+                        <MaterialCommunityIcons name={"dots-horizontal"} size={24}/>
+                </View>
+                <View style={styles.fileBoxStyle}>
+                   <Text style={{textAlign:"center",fontWeight:"700",color:"white"}}>SOP</Text>
+                </View>
+              </View>
+
+              <View style={styles.PhotoUploadStyle}>
+                  <View style={{flexDirection:"row"}}>
+                    <View style={{marginLeft:30}}>
+                      <Icon name={"image"} size={22}/>
+                    </View>
+                    <View style={{marginLeft:10}}>
+                       <Text style={{fontSize:16}}>Photos</Text>
+                    </View>
+                  </View>
+                  <View style={{flexDirection:"row",width:140,backgroundColor:"#c0c0c0",height:28,alignItems:"center",borderRadius:10,}}>
+                        <View style={{marginLeft:10}}>
+                           <Text>Add Document</Text>
+                        </View>
+                        <View style={{marginLeft:10}}>
+                          <FontAwesome5 name={"file-alt"} size={20}/>
+                        </View>
+                  </View>
               </View>
             </View>
           </View>
@@ -2526,5 +2581,25 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     borderRadius:10,
     top:-2
+  },
+  fileBoxStyle:{
+    width:40,
+    height:20,
+    backgroundColor:"#0384d5",
+    alignSelf:"center",
+    marginLeft:10,
+    borderTopLeftRadius:5,
+    borderBottomLeftRadius:5
+  },
+  PhotoUploadStyle:{
+    marginTop:50,
+    width:width*0.95,
+    height:50,
+    backgroundColor:"white",
+    elevation:10,
+    marginBottom:50,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center"
   }
 });

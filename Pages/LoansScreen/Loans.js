@@ -6,7 +6,7 @@ import { Dropdown } from "react-native-element-dropdown";
 
 const { width, height } = Dimensions.get("window");
 const SPACING = 40;
-const ITEM_SIZE = width * 0.9;
+const ITEM_SIZE = width * 0.7;
 
 
 const Loans = () => {
@@ -26,7 +26,7 @@ const Loans = () => {
   })
 
 
-
+  var endHeight = 3000;
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const data = [
     { title: 'Item 1' },
@@ -37,7 +37,7 @@ const Loans = () => {
 
   const rendercoursel = ({ item }) => {
     const inputRange = [
-      (index - 0.7) * ITEM_SIZE,
+      (index - 0.9) * ITEM_SIZE,
       index * ITEM_SIZE,
       (index + 1) * ITEM_SIZE,
     ];
@@ -49,15 +49,10 @@ const Loans = () => {
     return(
       <View style={styles.item}>
       {/* <Text style={styles.title}>{item.title}</Text> */}
-    </View>
+    </View> 
     )
   }
 
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      {/* <Text style={styles.title}>{item.title}</Text> */}
-    </View>
-  );
 
   const handlePhoneNumberChange = (value) => {
     try {
@@ -84,9 +79,9 @@ const Loans = () => {
       <View>
             <Carousel
                   data={data}
-                  renderItem={renderItem}
-                  sliderWidth={350}
-                  itemWidth={430}
+                  renderItem={rendercoursel}
+                  sliderWidth={ITEM_SIZE+110}
+                  itemWidth={300}
                   onSnapToItem={(index) => setIndex(index)}
                   // autoplay={true}
                   loop={true}
@@ -94,21 +89,8 @@ const Loans = () => {
                   layoutCardOffset={20}
                   ref={isCarousel}
               />
-              {/* <Carousel
-          ref={(c) => this.carousel = c}
-          data={data}
-          renderItem={rendercoursel}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          containerCustomStyle={styles.carouselContainer}
-          inactiveSlideShift={0}
-          onSnapToItem={(index) => this.setState({ index })}
-          scrollInterpolator={scrollInterpolator}
-          slideInterpolatedStyle={animatedStyles}
-          useScrollView={true}          
-        /> */}
 
-            <View style={{ marginTop: -25 }}>
+            <View style={{ marginTop: -15 }}>
               <Pagination
                 dotsLength={data.length}
                 activeDotIndex={index}
@@ -224,10 +206,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 5,
     padding: 20,
-    margin: 10,
+    marginTop: 20,
     elevation:5,
     width:width*0.7,
-    height:100
+    height:100,
+    left:-20
 
   },
   title: {
