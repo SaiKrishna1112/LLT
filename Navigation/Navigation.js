@@ -16,7 +16,7 @@ export default function Navigation(){
     return (
       
                 <Stack.Navigator
-                   initialRouteName="Login"
+                   initialRouteName="Loan"
                             screenOptions = {{
                                 headerTintColor: 'white',
                                 headerTitleStyle: styles.headerTitleStyle,

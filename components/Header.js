@@ -18,6 +18,8 @@ function SearchbarBox() {
       { label: "UG", value: "UG" },
       { label: "PG", value: "PG" },
     ]
+    const [StudyLevel,setStudyLevel] = React.useState();
+    const [Country,setCountry] = React.useState();
   
     const onChangeSearch = query => setSearchQuery(query);
   
@@ -85,16 +87,11 @@ function SearchbarBox() {
                       data={degreeSelectOption}
                       labelField="label"
                       valueField="value"
-                      // value={inputFields.schoolSelect}
-                      // onValueChange={(itemValue) => setFeeToParticipate(itemValue)}
-                      // onChange={(item) => {
-                      //   setInputFields({
-                      //     ...inputFields,
-                      //     schoolSelect: item.value,
-                      //   });
-                        // setWhatsappNotification(item.value);
-                        // console.log("selected", item);
-                      // }}
+                      value={Country}
+                      onChange={(item) => {
+                        setCountry(item.value)
+                        console.log("selected", item);
+                      }}
                     />
                </View>
            <View style={[styles.dropdownView,{flexDirection:"row",width:width*0.53}]}> 
@@ -105,16 +102,11 @@ function SearchbarBox() {
                       data={degreeSelectOption}
                       labelField="label"
                       valueField="value"
-                      // value={inputFields.schoolSelect}
-                      // onValueChange={(itemValue) => setFeeToParticipate(itemValue)}
-                      // onChange={(item) => {
-                      //   setInputFields({
-                      //     ...inputFields,
-                      //     schoolSelect: item.value,
-                      //   });
-                        // setWhatsappNotification(item.value);
-                        // console.log("selected", item);
-                      // }}
+                      value={StudyLevel}
+                      onChange={(item) => {
+                        setStudyLevel(item.value)
+                        console.log("selected", item);
+                      }}
                     />
            </View>
            </View>
@@ -122,9 +114,9 @@ function SearchbarBox() {
                 <View style={{flexDirection:"row",width:width*0.8,justifyContent:"space-evenly",left:-18}}>
                    <View style={{flexDirection:"row"}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option1')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option1') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>Without GMat</Text>
                      </View>
                      <View style={{flexDirection:"row"}}>
@@ -139,52 +131,52 @@ function SearchbarBox() {
                  <View style={{flexDirection:"row",width:width*0.8,justifyContent:"space-evenly",marginTop:-16}}>
                    <View style={{flexDirection:"row"}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option3')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option3') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>IELTS</Text>
                      </View>
                      <View style={{flexDirection:"row"}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option4')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option4') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>TOEFL</Text>
                      </View>
                      <View style={{flexDirection:"row"}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option5')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option5') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>PTE</Text>
                      </View>
                      <View style={{flexDirection:"row"}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option6')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option6') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>DET</Text>
                      </View>
                  </View>
                  <View style={{flexDirection:"row",left:-20,marginTop:-10}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option7')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option7') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>Without Application Fee</Text>
                      </View>
                      <View style={{flexDirection:"row",left:-20,marginTop:-10}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option8')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option8') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>Scholarship Available</Text>
                      </View>
                      <View style={{flexDirection:"row",left:-20,marginTop:-10}}>
                       <Checkbox.Item  
-                      onPress={() => handleCheckboxChange('option2')} 
+                      onPress={() => handleCheckboxChange('option9')} 
                       style={{top:-4}}
-                      status={options.includes('option2') ? 'checked' : 'unchecked'}/>  
+                      status={options.includes('option9') ? 'checked' : 'unchecked'}/>  
                       <Text style={{top:10,fontSize:16,left:-14}}>15 Years Education</Text>
                      </View>
   
@@ -194,10 +186,10 @@ function SearchbarBox() {
                          </View>
                          <View style={{flexDirection:"row",width:width*0.5,justifyContent:"space-evenly"}}>
                              <View>
-                                <TextInput style={styles.inputBox} placeholder='Min'/>
+                                <TextInput style={styles.inputBox} placeholder='Min' keyboardType='number-pad'/>
                              </View>
                              <View>
-                                <TextInput style={styles.inputBox} placeholder='Max'/>
+                                <TextInput style={styles.inputBox} placeholder='Max' keyboardType='number-pad'/>
                              </View>
                          </View>
                      </View>
