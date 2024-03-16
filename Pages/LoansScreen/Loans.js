@@ -19,7 +19,7 @@ const Loans = () => {
 
   const isCarousel = useRef(null);
   const [index, setIndex] = useState(0);
-  const [Selection,setSelection] = useState(2)
+  const [Selection,setSelection] = useState(1)
 
 
   var endHeight = 3000;
