@@ -51,11 +51,12 @@ const Loans = () => {
 
   const changeView = (data)=>{
     setSelection(data)
-  }
+  } 
 
   return (
     <View>
       {/* coursel start */}
+      {Selection != 3 && Selection != 4 && Selection != 5 && Selection !=6 ?
       <View style={{margin:10}}>
             <Carousel
                   data={data}
@@ -63,7 +64,7 @@ const Loans = () => {
                   sliderWidth={ITEM_SIZE+110}
                   itemWidth={300}
                   onSnapToItem={(index) => setIndex(index)}
-                  // autoplay={true}
+                  autoplay={true}
                   loop={true}
                   layout={"default"}
                   layoutCardOffset={20}
@@ -92,7 +93,7 @@ const Loans = () => {
                 inactiveDotScale={0.4}
               />
             </View>
-      </View>
+      </View>:null}
           {/* coursel end */}
 
           <ScrollView>
@@ -101,7 +102,7 @@ const Loans = () => {
               {Selection==3?<Co_Application changeView={changeView}/>:null}
               {Selection==4?<Work_Experience changeView={changeView}/>:null}
               {Selection==5?<References changeView={changeView}/>:null}
-              {Selection==5?<Choose_Bank changeView={changeView}/>:null}
+              {Selection==6?<Choose_Bank changeView={changeView}/>:null}
           </ScrollView>
 
     </View>

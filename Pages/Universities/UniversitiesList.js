@@ -152,18 +152,18 @@ const styles = StyleSheet.create({
 	},
 	boxContainer:{
 		width:width*0.95,
-		height:height*0.40,
+		height:308,
 		backgroundColor:"white",
 		elevation:5,
 		alignSelf:"center",
 		top:10,
 		borderRadius:20,
-		marginTop:10,
+		marginTop:12,
 		marginBottom:20
 	},
 	TxtStylesHeader:{
 		flexDirection:"row",
-		marginVertical:15,
+		marginVertical:18,
 		width:width*0.7
 	},
 	headLineView:{

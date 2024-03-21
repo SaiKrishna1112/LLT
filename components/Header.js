@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const {width,height} = Dimensions.get("window" || "screen")
 
-function SearchbarBox() {
+function SearchbarBox(props) {
     // const [searchQuery, setSearchQuery] = React.useState('');
     const [searchQuery, setSearchQuery] = React.useState(null);
     const [showFilters, setShowFilters] = React.useState(false);
@@ -64,11 +64,12 @@ function SearchbarBox() {
       </View>
       {showFilters? 
       null  :
-      <View style={{flexDirection:"row",top:8,right:-23}}>
-        <TouchableOpacity style={{marginRight:5}} onPress={()=>{navigation.navigate("Chat")}}>
+      <View style={{flexDirection:"row",top:8,right:-18}}>
+        {!props.data?
+        <TouchableOpacity style={{marginRight:5}} onPress={()=>{navigation.navigate("Notification")}}>
           <MaterialCommunityIcons name={"bell"} size={26} color={"white"}/>
           <Badge style={{position:"absolute",top:-10}} size={15}>3</Badge>
-        </TouchableOpacity>
+        </TouchableOpacity>:null}
         <TouchableOpacity style={{left:5}} onPress={()=>{navigation.navigate("Wishlist")}}>
           <MaterialCommunityIcons name={"heart"} size={26} color={"white"}/>
         </TouchableOpacity>
@@ -111,7 +112,7 @@ function SearchbarBox() {
            </View>
            </View>
             <View style={{width:width*0.8,marginTop:10}}>
-                <View style={{flexDirection:"row",width:width*0.8,justifyContent:"space-evenly",left:-18}}>
+                <View style={{flexDirection:"row",width:width*0.8,justifyContent:"space-evenly",left:-22}}>
                    <View style={{flexDirection:"row"}}>
                       <Checkbox.Item  
                       onPress={() => handleCheckboxChange('option1')} 
@@ -128,7 +129,7 @@ function SearchbarBox() {
                      </View>
                  </View>
   
-                 <View style={{flexDirection:"row",width:width*0.8,justifyContent:"space-evenly",marginTop:-16}}>
+                 <View style={{flexDirection:"row",width:width*0.8,justifyContent:"space-evenly",marginTop:-20}}>
                    <View style={{flexDirection:"row"}}>
                       <Checkbox.Item  
                       onPress={() => handleCheckboxChange('option3')} 
@@ -226,21 +227,16 @@ function SearchbarBox() {
       borderRadius: 5,
       borderColor: '#ccc',
       padding: 5,
-      // width:width*0.7,
       backgroundColor:"white"
     },
     activesearchInput: {
       flex: 1,
       padding: 0,
-      // width:width*0.7
     },
     modalContainer: {
       marginTop: 50, // Adjust the marginTop to position the modal at the top
-      // flex: 1,
-      // justifyContent: 'center',
-      // alignItems: 'center',
       backgroundColor: 'white',
-      height:height-400,
+      height:390,
       width:width*0.95,
       alignSelf:"center",
       borderBottomRightRadius:20,

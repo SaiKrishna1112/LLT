@@ -25,7 +25,7 @@ const ApplicationScreen = () => {
                     </View>
                 </View>
             </View>
-            <View style={{marginTop:20}}>
+            <View style={{marginTop:height*0.02}}>
             <View style={styles.nameList}>
                 <View style={styles.txtLine}>
                     <View style={styles.iconCircle}>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     },
     headerView:{
         flexDirection:"row",
-        marginTop:10,
+        marginTop:height*0.02,
         marginLeft:10
     },
     dotIcon:{
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     headerText:{
       color:"#0384d5",
       fontWeight:"800",
-      marginLeft:8,
+      marginLeft:width*0.025,
       top:5,
       fontSize:14
     },
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#B5C0D0",
         borderRadius:5,
         justifyContent:"center",
-        marginLeft:12,
+        marginLeft:width*0.046,
         top:2
     },
     iconView1:{
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         height:30,
         backgroundColor:"#B5C0D0",
         borderRadius:100,
-        marginLeft:18,
+        marginLeft:width*0.04,
         justifyContent:"center",
         // elevation:10
     },
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         height:30,
         backgroundColor:"#B5C0D0",
         borderRadius:100,
-        marginLeft:3,
+        marginLeft:width*0.022,
         justifyContent:"center"
     },
 

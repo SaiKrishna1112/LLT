@@ -9,6 +9,8 @@ import Chats from '../Pages/Chat/ChatScreen';
 import Tabs from './Tabs'
 import Wishlist from '../Pages/Application/Wishlist';
 import ApplicationScreen from '../Pages/Application/ApplicationScreen';
+import Notification from '../Pages/Notifications/Notification';
+import SearchbarBox from '../components/Header';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +18,7 @@ export default function Navigation(){
     return (
       
                 <Stack.Navigator
-                   initialRouteName="Loan"
+                   initialRouteName="Tabs"
                             screenOptions = {{
                                 headerTintColor: 'white',
                                 headerTitleStyle: styles.headerTitleStyle,
@@ -33,6 +35,7 @@ export default function Navigation(){
                         <Stack.Screen name="Chats" component={Chats} options={{headerShown:true}}/>
                         <Stack.Screen name="Wishlist" component={Wishlist} options={{headerShown:true}} />
                         <Stack.Screen name="Tabs" component={Tabs} options={{headerShown:false}}/>
+                        <Stack.Screen name="Notification" component={Notification} options={{headerShown:true,headerTitle: (props) => <SearchbarBox data={true}/>}}/>
                 </Stack.Navigator>
        
 );

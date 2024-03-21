@@ -1218,7 +1218,7 @@ const handleCheckboxChange = (value) => {
 																</View>
                </View> 
 															<View style={styles.rowContainer3}>
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showCollegeStartDate && (
                       <DatePicker
                         testID="DatePicker"
@@ -1245,13 +1245,13 @@ const handleCheckboxChange = (value) => {
                           {inputFields.collegeStartDate}
                         </Text>
                       </View>
-                      <View style={{ alignSelf: "flex-end", left: -12 }}>
+                      <View style={{ alignSelf: "flex-end", left: -14 }}>
                         <FontAwesome5 name={"calendar-alt"} size={18} />
                       </View>
                     </TouchableOpacity>
                   </View>
 
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showCollegeEndDate && (
                       <DatePicker
                         testID="DatePicker"
@@ -1270,7 +1270,7 @@ const handleCheckboxChange = (value) => {
                       <View
                         style={{
                           alignSelf: "flex-start",
-                          left: 8,
+                          left: 6,
                           justifyItem: "center",
                         }}
                       >
@@ -1302,7 +1302,7 @@ const handleCheckboxChange = (value) => {
                 />
 																 <View style={styles.rowContainer3}>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Marks gained"
                     value={inputFields.collegeMarks}
                     onChange={(text) =>
@@ -1310,7 +1310,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Scale"
                     value={inputFields.collegeScale}
                     onChange={(text) =>
@@ -1350,7 +1350,7 @@ const handleCheckboxChange = (value) => {
 																</View>
                </View> 
 															<View style={styles.rowContainer3}>
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showInterStartDate && (
                       <DatePicker
                         testID="DatePicker"
@@ -1383,7 +1383,7 @@ const handleCheckboxChange = (value) => {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showInterEndDate && (
                       <DatePicker
                         testID="DatePicker"
@@ -1434,7 +1434,7 @@ const handleCheckboxChange = (value) => {
                 />
 																 <View style={styles.rowContainer3}>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Marks gained"
                     value={inputFields.intermarks}
                     onChange={(text) =>
@@ -1442,7 +1442,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Scale"
                     value={inputFields.interScale}
                     onChange={(text) =>
@@ -1483,7 +1483,7 @@ const handleCheckboxChange = (value) => {
 																</View>
                </View> 
 															<View style={styles.rowContainer3}>
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showSchoolStartDate && (
                       <DatePicker
                         testID="DatePicker"
@@ -1516,7 +1516,7 @@ const handleCheckboxChange = (value) => {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showSchoolEndDate && (
                       <DatePicker
                         testID="DatePicker"
@@ -1567,7 +1567,7 @@ const handleCheckboxChange = (value) => {
                 />
 																 <View style={styles.rowContainer3}>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Marks gained"
                     value={inputFields.schoolmarks}
                     onChange={(text) =>
@@ -1575,7 +1575,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Scale"
                     value={inputFields.schoolScale}
                     onChange={(text) =>
@@ -1655,7 +1655,7 @@ const handleCheckboxChange = (value) => {
                 />
 
 <View style={styles.rowContainer3}>
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showJobStart && (
                       <DatePicker
                         testID="DatePicker"
@@ -1688,7 +1688,7 @@ const handleCheckboxChange = (value) => {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showJobEnd && (
                       <DatePicker
                         testID="DatePicker"
@@ -1780,7 +1780,7 @@ const handleCheckboxChange = (value) => {
                 />
 
 <View style={styles.rowContainer3}>
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showAdditionJobStart && (
                       <DatePicker
                         testID="DatePicker"
@@ -1813,7 +1813,7 @@ const handleCheckboxChange = (value) => {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showAdditionJobEnd && (
                       <DatePicker
                         testID="DatePicker"
@@ -1919,7 +1919,7 @@ const handleCheckboxChange = (value) => {
                   
               <View style={styles.rowContainer3}>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Listening"
                     value={inputFields.Listening}
                     onChange={(text) =>
@@ -1927,7 +1927,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Speaking"
                     value={inputFields.Speaking}
                     onChange={(text) =>
@@ -1938,7 +1938,7 @@ const handleCheckboxChange = (value) => {
 
                 <View style={styles.rowContainer3}>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Writing"
                     value={inputFields.Writing}
                     onChange={(text) =>
@@ -1946,7 +1946,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Reading"
                     value={inputFields.Reading}
                     onChange={(text) =>
@@ -1956,7 +1956,7 @@ const handleCheckboxChange = (value) => {
                 </View>
 
                 <View style={styles.rowContainer3}>
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showDateOfExam && (
                       <DatePicker
                         testID="DatePicker"
@@ -1989,7 +1989,7 @@ const handleCheckboxChange = (value) => {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showTextValidUntil && (
                       <DatePicker
                         testID="DatePicker"
@@ -2038,7 +2038,7 @@ const handleCheckboxChange = (value) => {
 
                 <View style={styles.rowContainer3}>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Verbal"
                     value={inputFields.Verbal}
                     onChange={(text) =>
@@ -2046,7 +2046,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="AWA"
                     value={inputFields.AWA}
                     onChange={(text) =>
@@ -2057,7 +2057,7 @@ const handleCheckboxChange = (value) => {
 
                 <View style={styles.rowContainer3}>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Quant"
                     value={inputFields.Quant}
                     onChange={(text) =>
@@ -2065,7 +2065,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input,{width:width*0.41}]}
                     placeholder="Over all score"
                     value={inputFields.overAllScore1}
                     onChange={(text) =>
@@ -2075,7 +2075,7 @@ const handleCheckboxChange = (value) => {
                 </View>
 
                 <View style={styles.rowContainer3}>
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showDateOfExam1 && (
                       <DatePicker
                         testID="DatePicker"
@@ -2102,13 +2102,13 @@ const handleCheckboxChange = (value) => {
                           {inputFields.DateofExamination1}
                         </Text>
                       </View>
-                      <View style={{ alignSelf: "flex-end", left: -10 }}>
+                      <View style={{ alignSelf: "flex-end", left: -4 }}>
                         <FontAwesome5 name={"calendar-alt"} size={18} />
                       </View>
                     </TouchableOpacity>
                   </View>
 
-                  <View style={styles.input}>
+                  <View style={[styles.input,{width:width*0.41}]}>
                     {inputFields.showTextValidUntil1 && (
                       <DatePicker
                         testID="DatePicker"

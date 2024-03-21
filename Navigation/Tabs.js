@@ -14,13 +14,6 @@ import SearchbarBox from '../components/Header'
 import Loans from '../Pages/LoansScreen/Loans';
 
 
-function Menu() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Menu!</Text>
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 const HomeScreen = createNativeStackNavigator();

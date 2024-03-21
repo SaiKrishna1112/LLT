@@ -16,9 +16,9 @@ const Wishlist = () => {
                 <Icon name={"university"} size={85} />
             </View>
         </View>
-        <View style={{width:width*0.54}}>
+        <View style={{width:width*0.54,marginTop:height*0.0125}}>
             <View style={{marginLeft:35}}>
-            <Text>WishlistID:1234567890</Text>
+            <Text >WishlistID:1234567890</Text>
             </View>
         <View style={styles.headLineView}>
              <View style={styles.iconCircle}>
@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
     },
     headLineView:{
 		flexDirection:"row",
-		width:width*0.4
+		width:width*0.4,
+        marginTop:height*0.01
 	},
 	headerTxtView:{
 		width:width*0.4,
