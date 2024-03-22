@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React from "react";
+import React,{useState,useRef} from "react";
 import Animated, {
   FadeInDown,
   FadeInLeft,
@@ -17,6 +17,9 @@ import Animated, {
 import Icon from 'react-native-vector-icons/Ionicons'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import {useNavigation,useRoute} from '@react-navigation/native'
+import loginfunction from "../../Api/BeforeLogin";
+import FlashMessage from "react-native-flash-message";
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -24,7 +27,49 @@ const Signin = (props) => {
 
 	const navigation = useNavigation();
 	const params = useRoute();
+	const flashMessage = useRef(); 
+
+
+	const [inputFields,setInputFields]=useState({
+			username:"",
+			username_Error:false,
+			password:"",
+			password_Error:false
+	})
+	var errorMessage
 	
+async	function signinfunction(){
+			if(inputFields.username=="" || inputFields.username==null){
+				setInputFields({...inputFields,username_Error:true})
+				return false
+			}
+			if(inputFields.password=="" || inputFields.password==null){
+				setInputFields({...inputFields,password_Error:true})
+				return false
+			}
+const data= await loginfunction(inputFields);
+			console.log("data",data)
+			errorMessage=data.message
+			messagePopError()
+
+	}
+
+
+function messagePopError(){
+		flashMessage.current.showMessage({
+		message: 'Sorry',
+		description: errorMessage,
+		type: 'danger',
+		icon: () => <Icon
+					name="warning"
+					size={30}
+					color="white"
+					style={{paddingRight: 20, paddingTop: 14}}
+			/>
+		});
+	}
+
+
 
   return (
 										<View>
@@ -43,26 +88,40 @@ const Signin = (props) => {
 																<View style={styles.inputBox}>
 																		<TextInput
 																				style={styles.textInputField}
-																				placeholder="First Name"
-																				// value={}
-																				// onChangeText={() => ()}
+																				placeholder="Email / Mobile Number"
+																				value={inputFields.username}
+																				onChangeText={(text) => setInputFields({...inputFields, username : text , username_Error : false})}
 																		/>
 																</View>
+
+																{inputFields.username_Error?
+																	<View>
+																		<Text style={styles.errorText}> Field is Mandatory </Text>
+																	</View>
+																:null}
+
 																<View style={styles.inputBox}>
 																		<TextInput
 																				style={styles.textInputField}
-																				placeholder="Confirm Password"
-																				// value={}
-																				// onChangeText={() => ()}
+																				placeholder="Password"
+																				value={inputFields.password}
+																				onChangeText={(text) => setInputFields({...inputFields, password: text , password_Error:false})}
 																		/>
 																</View>
+
+																{inputFields.password_Error?
+																	<View>
+																		<Text style={styles.errorText}> Field is Mandatory </Text>
+																	</View>
+																:null}
+
 																<TouchableOpacity style={{ alignItems: "center", marginTop:20 }} onPress={()=>navigation.navigate("Forgot Password")}>
 																	<Text style={{ color: "#808080" }}>Forgot Password?</Text>
 																</TouchableOpacity>
 														</ScrollView>
 														<View>
 																<TouchableOpacity style={styles.btn} 
-																onPress={()=>navigation.navigate("Tabs")}>
+																onPress={()=>signinfunction()}>
 																		<Text
 																				style={{
 																						textAlign: "center",
@@ -110,6 +169,8 @@ const Signin = (props) => {
 																</View>
 														</View>
 													</Animated.View>
+													<FlashMessage ref={flashMessage} position="top" />
+
 					     </View>
   );
 };
@@ -140,6 +201,12 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     alignSelf: "center",
   },
+	errorText:{
+		color:"red",
+		fontWeight:"bold",
+		top:-5,
+		textAlign:"center"
+	},
   textInputField: {
     width: width * 0.6,
     height: 40,

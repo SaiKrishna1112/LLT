@@ -11,6 +11,7 @@ import Wishlist from '../Pages/Application/Wishlist';
 import ApplicationScreen from '../Pages/Application/ApplicationScreen';
 import Notification from '../Pages/Notifications/Notification';
 import SearchbarBox from '../components/Header';
+import ApplicationProcess from '../Pages/Application/ApplicationProcess';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,7 @@ export default function Navigation(){
     return (
       
                 <Stack.Navigator
-                   initialRouteName="Tabs"
+                //    initialRouteName="Application Process"
                             screenOptions = {{
                                 headerTintColor: 'white',
                                 headerTitleStyle: styles.headerTitleStyle,
@@ -36,6 +37,7 @@ export default function Navigation(){
                         <Stack.Screen name="Wishlist" component={Wishlist} options={{headerShown:true}} />
                         <Stack.Screen name="Tabs" component={Tabs} options={{headerShown:false}}/>
                         <Stack.Screen name="Notification" component={Notification} options={{headerShown:true,headerTitle: (props) => <SearchbarBox data={true}/>}}/>
+                        <Stack.Screen name="Application Process" component={ApplicationProcess}/>
                 </Stack.Navigator>
        
 );

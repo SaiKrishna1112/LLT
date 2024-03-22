@@ -8,7 +8,7 @@ import {
 	TouchableOpacity,
 	Image,
 } from "react-native";
-import React from "react";
+import React,{useState} from "react";
 import Animated, {
 	FadeInDown,
 	FadeInLeft,
@@ -21,6 +21,43 @@ const { height, width } = Dimensions.get("window");
 
 const SignUp = (props) => {
 
+	const[inputFields,setInputFields]=useState({
+		firstName:"",
+		firstName_Error:false,
+		lastName:"",
+		lastName_Error:false,
+		email:"",
+		email_Error:false,
+		createPassword:"",
+		createPassword_Error:false,
+		confirmPassword:"",
+		confirmPassword_Error:false
+	})
+
+
+	function signupfunction(){
+
+		if(inputFields.firstName=="" || inputFields.firstName==null){
+			setInputFields({...inputFields,firstName_Error:true})
+			return false
+		}
+		if(inputFields.lastName=="" || inputFields.lastName==null){
+			setInputFields({...inputFields,lastName_Error:true})
+			return false
+		}
+		if(inputFields.email=="" || inputFields.email==null){
+			setInputFields({...inputFields,email_Error:true})
+			return false
+		}
+		if(inputFields.createPassword=="" || inputFields.createPassword==null){
+			setInputFields({...inputFields,createPassword_Error:true})
+			return false
+		}
+		if(inputFields.confirmPassword=="" || inputFields.confirmPassword==null){
+			setInputFields({...inputFields,confirmPassword_Error:true})
+			return false
+		}
+	}
 
 	return (
 											<View>
@@ -40,45 +77,82 @@ const SignUp = (props) => {
 																			<TextInput
 																					style={styles.textInputField}
 																					placeholder="First Name"
-																					// value={}
-																					// onChangeText={() => ()}
+																					value={inputFields.firstName}
+																					onChangeText={(text) => setInputFields({...inputFields, firstName : text , firstName_Error : false})}
 																			/>
 																	</View>
+
+																	{inputFields.firstName_Error?
+																		<View>
+																			<Text style={styles.errorText}> Field is Mandatory </Text>
+																		</View>
+																	:null}
+																	
+
 																	<View style={styles.inputBox}>
 																			<TextInput
 																					style={styles.textInputField}
 																					placeholder="Last Name"
-																					// value={}
-																					// onChangeText={() => ()}
+																					value={inputFields.lastName}
+																				onChangeText={(text) => setInputFields({...inputFields, lastName : text , lastName_Error : false})}
 																			/>
 																	</View>
+
+																	{inputFields.lastName_Error?
+																		<View>
+																			<Text style={styles.errorText}> Field is Mandatory </Text>
+																		</View>
+																	:null}
+
 																	<View style={styles.inputBox}>
 																			<TextInput
 																					style={styles.textInputField}
-																					placeholder="Email Address"
-																					// value={}
-																					// onChangeText={() => ()}
+																					placeholder="Email"
+																						value={inputFields.email}
+																				onChangeText={(text) => setInputFields({...inputFields, email : text , email_Error : false})}
 																			/>
 																	</View>
+
+																	{inputFields.email_Error?
+																		<View>
+																			<Text style={styles.errorText}> Field is Mandatory </Text>
+																		</View>
+																	:null}
+
 																	<View style={styles.inputBox}>
 																			<TextInput
 																					style={styles.textInputField}
 																					placeholder="Create Password"
-																					// value={}
-																					// onChangeText={() => ()}
+																						value={inputFields.createPassword}
+																				onChangeText={(text) => setInputFields({...inputFields, createPassword : text , createPassword_Error : false})}
 																			/>
 																	</View>
+
+																	{inputFields.createPassword_Error?
+																		<View>
+																			<Text style={styles.errorText}> Field is Mandatory </Text>
+																		</View>
+																	:null}
+
 																	<View style={styles.inputBox}>
 																			<TextInput
 																					style={styles.textInputField}
 																					placeholder="Confirm Password"
-																					// value={}
-																					// onChangeText={() => ()}
+																						value={inputFields.confirmPassword}
+																				onChangeText={(text) => setInputFields({...inputFields, confirmPassword : text , confirmPassword_Error : false})}
 																			/>
 																	</View>
+
+																	{inputFields.confirmPassword_Error?
+																		<View>
+																			<Text style={styles.errorText}> Field is Mandatory </Text>
+																		</View>
+																	:null}
+
+
 															</ScrollView>
 															<View>
-																	<TouchableOpacity style={styles.btn}>
+																	<TouchableOpacity style={styles.btn} onPress={()=>signupfunction()}>
 																			<Text
 																					style={{
 																							textAlign: "center",
@@ -154,6 +228,12 @@ const styles = StyleSheet.create({
 			marginTop: 2,
 			borderWidth: 0.5,
 			alignSelf: "center",
+	},
+	errorText:{
+		color:"red",
+		fontWeight:"bold",
+		top:-5,
+		textAlign:"center"
 	},
 	textInputField: {
 			width: width * 0.6,
