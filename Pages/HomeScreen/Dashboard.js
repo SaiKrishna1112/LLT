@@ -8,6 +8,8 @@ import Animated, {
     FadeInLeft,
     FadeInRight,
   } from "react-native-reanimated";
+  import { useDispatch, useSelector } from 'react-redux';
+
 
 import VerticalStepIndicator from '../../components/Step_Indicate';
 import ProgressSteps from '../../components/Steps';
@@ -49,6 +51,9 @@ const barData = [
 
 const Dashboard = () => {
     const [currentStep, setCurrentStep] = React.useState(0);
+    const user = useSelector(state => state.user);
+    console.log(user.userList[0].id);
+    console.log(user.userList);
   return (
     <View style={styles.container}>
         <ScrollView>
@@ -144,6 +149,7 @@ const Dashboard = () => {
             side="right"
             />
         </View>
+        
         <View style={{position:"absolute",width:width,height:height-600,backgroundColor:"blue",bottom:0,borderTopRightRadius:40,borderTopLeftRadius:40}}>
 
         </View>

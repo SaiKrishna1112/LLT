@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  ActivityIndicator
 } from "react-native";
 import React,{useState,useRef} from "react";
 import Animated, {
@@ -20,6 +21,9 @@ import {useNavigation,useRoute} from '@react-navigation/native'
 import loginfunction from "../../Api/BeforeLogin";
 import FlashMessage from "react-native-flash-message";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '../../Store/userReducer';
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -28,17 +32,19 @@ const Signin = (props) => {
 	const navigation = useNavigation();
 	const params = useRoute();
 	const flashMessage = useRef(); 
-
+	const dispatch = useDispatch();
 
 	const [inputFields,setInputFields]=useState({
 			username:"",
 			username_Error:false,
 			password:"",
-			password_Error:false
+			password_Error:false,
+			loading:false
 	})
 	var errorMessage
 	
 async	function signinfunction(){
+	setInputFields({...inputFields,loading:true})
 			if(inputFields.username=="" || inputFields.username==null){
 				setInputFields({...inputFields,username_Error:true})
 				return false
@@ -49,8 +55,16 @@ async	function signinfunction(){
 			}
 const data= await loginfunction(inputFields);
 			console.log("data",data)
+			if(data.message){
 			errorMessage=data.message
+			setInputFields({...inputFields,loading:false})
 			messagePopError()
+			}else if(data){
+				dispatch(updateUser(data))
+				navigation.navigate("Tabs")
+			setInputFields({...inputFields,loading:false})
+			}
+			
 
 	}
 
@@ -120,8 +134,10 @@ function messagePopError(){
 																</TouchableOpacity>
 														</ScrollView>
 														<View>
+
 																<TouchableOpacity style={styles.btn} 
 																onPress={()=>signinfunction()}>
+																	{!inputFields.loading?
 																		<Text
 																				style={{
 																						textAlign: "center",
@@ -131,7 +147,9 @@ function messagePopError(){
 																				}}
 																		>
 																				SIGN IN
-																		</Text>
+																		</Text>:
+																			<ActivityIndicator size={25} color={"white"} />
+																			}
 																</TouchableOpacity>
 														</View>
 											 	</Animated.View>
@@ -169,7 +187,7 @@ function messagePopError(){
 																</View>
 														</View>
 													</Animated.View>
-													<FlashMessage ref={flashMessage} position="top" />
+													<FlashMessage ref={flashMessage} position="bottom" />
 
 					     </View>
   );
