@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,Dimensions, ScrollView } from 'react-native'
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { BarChart } from "react-native-gifted-charts";
@@ -13,6 +13,7 @@ import Animated, {
 
 import VerticalStepIndicator from '../../components/Step_Indicate';
 import ProgressSteps from '../../components/Steps';
+import {staticCout} from '../../Api/AfterLogin'
 const {width,height} = Dimensions.get("screen" || "window")
 const screenWidth = Dimensions.get("window").width*0.95;
 
@@ -51,9 +52,28 @@ const barData = [
 
 const Dashboard = () => {
     const [currentStep, setCurrentStep] = React.useState(0);
+				const [countAppied,setCountAppied] = useState()
+				const [countApplication,setCountApplication]=useState();
+				const [countApprove,setCountApprove]=useState();
+				const [countReject,setCountReject]=useState();
     const user = useSelector(state => state.user);
-    console.log(user.userList[0].id);
-    console.log(user.userList);
+    // console.log(user.userList[0].id);
+    // console.log(user.userList);
+				useEffect(()=>{
+					if(user.userList){
+					staticCout(user.userList[0].id)
+					.then(function(response){
+						console.log({response});
+						// setCountAppied(response.application-submitted)
+						// setCountApplication(response.application-requested)
+						// setCountApprove(response.approve-and-assign)
+						// setCountReject(response.reject)
+					})
+					.catch(function(error){
+						console.log(error);
+					})
+					}
+				},[])
   return (
     <View style={styles.container}>
         <ScrollView>
@@ -67,7 +87,7 @@ const Dashboard = () => {
                 </Text>
                 <View style={styles.textRow}>
                     <Text style={styles.innerText}>
-                        03
+                        {/* {count} */}
                     </Text>
                     <View>
                         <Icon name="person" size={32} style={styles.icon}/>

@@ -9,7 +9,7 @@ import {
   Image,
   ActivityIndicator
 } from "react-native";
-import React,{useState,useRef} from "react";
+import React,{useState,useRef,useEffect} from "react";
 import Animated, {
   FadeInDown,
   FadeInLeft,
@@ -23,7 +23,7 @@ import FlashMessage from "react-native-flash-message";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../Store/userReducer';
-
+ 
 
 const { height, width } = Dimensions.get("window");
 
@@ -33,6 +33,14 @@ const Signin = (props) => {
 	const params = useRoute();
 	const flashMessage = useRef(); 
 	const dispatch = useDispatch();
+	const user = useSelector(state => state.user);
+
+				useEffect(() => {
+					if(user.userList[0]!=undefined){
+						navigation.navigate("Tabs")
+					}
+				}, [user])
+				
 
 	const [inputFields,setInputFields]=useState({
 			username:"",
