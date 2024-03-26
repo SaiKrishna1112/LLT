@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Octicon from "react-native-vector-icons/Octicons";
@@ -20,10 +20,16 @@ import PhoneInput from "react-native-phone-number-input";
 import { RadioButton, Button, Checkbox } from "react-native-paper";
 import DatePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-element-dropdown";
+import {useNavigation} from "@react-navigation/native";
+import {useSelector} from "react-redux";
+import axios from "axios"
+import {userData} from "../../Api/AfterLogin"
 
 const { height, width } = Dimensions.get("window" || "screen");
 
 const Profile = () => {
+
+	const user = useSelector(state=>state.user)
   const [inputFields, setInputFields] = useState({
     firstName: "",
     lastName: "",
@@ -130,7 +136,18 @@ const Profile = () => {
 
 
   });
+
+		const [hide,setHide] = useState({
+			 PersonalShow:false,
+				EducationShow:false,
+				WorkShow:false,
+				TestShow:false,
+				DocumentShow:false
+		})
+		const [loading,setLoading] = useState(false)
   const [options,setOptions] = useState([])
+
+		const navigation = useNavigation()
 
   const handlePhoneNumberChange = (value) => {
     try {
@@ -661,6 +678,90 @@ const handleCheckboxChange = (value) => {
   }
 };
 
+// Hide and Show 
+
+const ViewAll = ()=>{
+	setHide({...hide,PersonalShow:!hide.PersonalShow,WorkShow:!hide.WorkShow,EducationShow:!hide.EducationShow,TestShow:!hide.TestShow,DocumentShow:!hide.DocumentShow})
+}
+
+const personalDetailView = ()=>{
+	setHide({...hide,
+		PersonalShow:!hide.PersonalShow,
+		WorkShow:false,
+		EducationShow:false,
+		TestShow:false,
+		DocumentShow:false})
+}
+
+const EducationDetailView = ()=>{
+	setHide({...hide,
+		PersonalShow:false,
+		WorkShow:false,
+		EducationShow:!hide.EducationShow,
+		TestShow:false,
+		DocumentShow:false})
+}
+
+const WorkDetailView = ()=>{
+	setHide({...hide,
+		PersonalShow:false,
+		WorkShow:!hide.WorkShow,
+		EducationShow:false,
+		TestShow:false,
+		DocumentShow:false})
+}
+
+const TestDetailView = ()=>{
+	setHide({...hide,
+		PersonalShow:false,
+		WorkShow:false,
+		EducationShow:false,
+		TestShow:!hide.TestShow,
+		DocumentShow:false})
+}
+
+const DocumentDetailView = ()=>{
+	setHide({...hide,
+		PersonalShow:false,
+		WorkShow:false,
+		EducationShow:false,
+		TestShow:false,
+		DocumentShow:!hide.DocumentShow})
+}
+const [PersonData,setPersonData] = useState([])
+const [image,setimage] = useState()
+useEffect(()=>{
+	userData(user.userList[0].id)
+	.then(function(response){
+		console.log({response});
+		setPersonData(response || null)
+		axios({
+			url: `https://lltapp.net/api/v1/${user.userList[0].id}/user-profile/download/${response.profilePic}`,
+			method:'GET',
+		})
+		.then(function(response){
+				// console.log(response);
+				setimage(response)
+		})
+		.catch(function(error){
+			console.log(error);
+		})
+	})
+	.catch(function(error){
+		console.log(error);
+	})
+},[])
+let imagePreview = (
+	<Image
+			source={require("../../assets/user.png")}
+			style={styles.img}
+	/>
+);
+
+if (image) {
+	imagePreview = <Image source={{ uri: `data:image/jpeg;base64,${image}` }} style={styles.img} />;
+}
+
   return (
     <View>
       <ScrollView>
@@ -669,29 +770,30 @@ const handleCheckboxChange = (value) => {
             <View style={styles.container}></View>
 
             <View style={styles.rowContainer}>
-              <View style={styles.editContainer}>
+              <TouchableOpacity style={styles.editContainer}>
                 <FontAwesome5
                   name="user-edit"
                   size={18}
                   color="#0384d5"
                   style={{ justifyContent: "center", alignSelf: "center" }}
                 />
-              </View>
-              <View style={styles.likeContainer}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.likeContainer} onPress={(e)=>{navigation.navigate("Wishlist")}}>
                 <Icon
                   name="heart"
                   size={25}
                   color="#0384d5"
                   style={{ justifyContent: "center", alignSelf: "center" }}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.imgView}>
-              <Image
+              {/* <Image
                 source={require("../../assets/user.png")}
                 style={styles.img}
-              />
+              /> */}
+														<View>{imagePreview}</View>
             </View>
 
             <View style={{ marginLeft: 20, width: width * 0.9 }}>
@@ -704,7 +806,7 @@ const handleCheckboxChange = (value) => {
                     style={{ justifyContent: "center", alignSelf: "center" }}
                   />
                 </View>
-                <Text style={{ fontSize: 18 }}>Sai Krishna Dharmapuri</Text>
+                <Text style={{ fontSize: 18 }}>{PersonData.firstName}  {PersonData.lastName}</Text>
               </View>
 
               <View style={styles.rowContainer1}>
@@ -720,7 +822,7 @@ const handleCheckboxChange = (value) => {
                     }}
                   />
                 </View>
-                <Text style={{ fontSize: 18 }}>+91 9876543210</Text>
+                <Text style={{ fontSize: 18 }}>+{PersonData.phoneNumber}</Text>
                 <View style={styles.editContainer2}>
                   <Icon
                     name="people-outline"
@@ -741,7 +843,7 @@ const handleCheckboxChange = (value) => {
                     style={{ justifyContent: "center", alignSelf: "center" }}
                   />
                 </View>
-                <Text style={{ fontSize: 18 }}>12-07-1991</Text>
+                <Text style={{ fontSize: 18 }}>{PersonData.dateOfBirth}</Text>
               </View>
 
               <View style={styles.rowContainer1}>
@@ -758,12 +860,15 @@ const handleCheckboxChange = (value) => {
                   />
                 </View>
                 <Text style={{ fontSize: 18 }}>
-                  somethingspecial18181@gmail.com
+                  {PersonData.email ? PersonData.email : "-"}
                 </Text>
               </View>
             </View>
           </View>
-
+      
+						<TouchableOpacity style={styles.viewBtn} onPress={()=>ViewAll()}>
+							  <Text>View All</Text>
+						</TouchableOpacity>
           {/* Personal Details */}
 
           <View>
@@ -787,7 +892,7 @@ const handleCheckboxChange = (value) => {
                     <Text style={styles.text}>45% completed</Text>
                   </View>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => personalDetailView()}>
                     <FontAwesome5
                       name="eye"
                       size={15}
@@ -806,7 +911,7 @@ const handleCheckboxChange = (value) => {
                   </TouchableOpacity>
                 </View>
               </View>
-
+      {hide.PersonalShow?
               <View style={{ margin: 10, width: width * 0.9 }}>
                 <View style={styles.rowContainer3}>
                   <TextInput
@@ -1142,6 +1247,7 @@ const handleCheckboxChange = (value) => {
                   </TouchableOpacity>
                 </View>
               </View>
+														:null}
             </View>
           </View>
 
@@ -1167,7 +1273,7 @@ const handleCheckboxChange = (value) => {
                     <Text style={styles.text}>45% completed</Text>
                   </View>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => EducationDetailView()}>
                     <FontAwesome5
                       name="eye"
                       size={15}
@@ -1186,6 +1292,8 @@ const handleCheckboxChange = (value) => {
                   </TouchableOpacity>
                 </View>
               </View>
+														{hide.EducationShow?
+														<View>
 														{/* College life */}
 														<View>
 														<View style={styles.emailinput}>
@@ -1320,6 +1428,7 @@ const handleCheckboxChange = (value) => {
                 </View>
 														</View>
 																{/* Inter details */}
+																<View>
 																<View style={styles.emailinput}>
 															<View style={{flexDirection:"row",justifyContent:"space-between"}}>
 															 <View style={{alignSelf:"center",top:1}}>
@@ -1450,6 +1559,7 @@ const handleCheckboxChange = (value) => {
                     }
                   />
                 </View>
+																</View>
          
                  {/* School  Life */}
 
@@ -1591,6 +1701,8 @@ const handleCheckboxChange = (value) => {
                     <Text style={styles.saveText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
+																</View>
+																:null}
             </View>
           </View>
 
@@ -1617,12 +1729,12 @@ const handleCheckboxChange = (value) => {
                     <Text style={styles.text}>45% completed</Text>
                   </View>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => WorkDetailView()}>
                     <FontAwesome5
                       name="eye"
                       size={15}
                       color="#808080"
-                      style={{ alignSelf: "center", margin: 3 }}
+                      style={{ alignSelf: "center", margin: 3,marginLeft:width*0.02 }}
                     />
                   </TouchableOpacity>
 
@@ -1631,11 +1743,14 @@ const handleCheckboxChange = (value) => {
                       name="edit"
                       size={15}
                       color="#808080"
-                      style={{ alignSelf: "center", margin: 3 }}
+                      style={{ alignSelf: "center", margin: 3,marginLeft:width*0.02 }}
                     />
                   </TouchableOpacity>
                 </View>
               </View>
+
+												{hide.WorkShow?
+														<View>
 
               <TextInput
                   style={styles.emailinput}
@@ -1854,8 +1969,10 @@ const handleCheckboxChange = (value) => {
                     <Text style={styles.saveText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
-
+														</View>		
+														:null}											
             </View>
+												
           </View>
 
           {/* Test Scores */}
@@ -1880,12 +1997,12 @@ const handleCheckboxChange = (value) => {
                     <Text style={styles.text}>45% completed</Text>
                   </View>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => TestDetailView()}>
                     <FontAwesome5
                       name="eye"
                       size={15}
                       color="#808080"
-                      style={{ alignSelf: "center", margin: 3 }}
+                      style={{ alignSelf: "center", margin: 3,marginLeft:width*0.09 }}
                     />
                   </TouchableOpacity>
 
@@ -1894,11 +2011,13 @@ const handleCheckboxChange = (value) => {
                       name="edit"
                       size={15}
                       color="#808080"
-                      style={{ alignSelf: "center", margin: 3 }}
+                      style={{ alignSelf: "center", margin: 3,marginLeft:width*0.02 }}
                     />
                   </TouchableOpacity>
                 </View>
               </View>
+														{hide.TestShow?
+														<View>
               <View style={styles.btnBarStyle}>
                   <TouchableOpacity onPress={()=>setInputFields({...inputFields,select:1})} style={inputFields.select==1? styles.buttonActive: styles.buttonDeactive}> 
                     <Text style={inputFields.select==1? styles.buttonActiveTxt: styles.buttonDeactiveTxt}>IELTS</Text>
@@ -2152,6 +2271,8 @@ const handleCheckboxChange = (value) => {
                 </View>
 
             </View>
+												:null}
+												</View>
           </View>
 
           {/* Documents  */}
@@ -2177,12 +2298,12 @@ const handleCheckboxChange = (value) => {
                     <Text style={styles.text}>45% completed</Text>
                   </View>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => DocumentDetailView()}>
                     <FontAwesome5
                       name="eye"
                       size={15}
                       color="#808080"
-                      style={{ alignSelf: "center", margin: 3 }}
+                      style={{ alignSelf: "center", margin: 3 , marginLeft:width*0.1}}
                     />
                   </TouchableOpacity>
 
@@ -2191,11 +2312,13 @@ const handleCheckboxChange = (value) => {
                       name="edit"
                       size={15}
                       color="#808080"
-                      style={{ alignSelf: "center", margin: 3 }}
+                      style={{ alignSelf: "center", margin: 3 , marginLeft:width*0.03 }}
                     />
                   </TouchableOpacity>
                 </View>
               </View>
+														{hide.DocumentShow?
+														<View>
               <View style={styles.fileUploadStyle}>
                 <View style={styles.iconStyleFile}>
                      
@@ -2268,6 +2391,8 @@ const handleCheckboxChange = (value) => {
                         </View>
                   </View>
               </View>
+														</View>
+														:null}
             </View>
           </View>
 
@@ -2350,7 +2475,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     backgroundColor: "white",
-    marginTop: 30,
+    marginTop: 20,
     borderRadius: 10,
     width: width * 0.95,
     alignSelf: "center",
@@ -2601,5 +2726,18 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center"
-  }
+  },
+		viewBtn:{
+				width:80,
+				height:22,
+				borderRadius:20,
+				backgroundColor:"white",
+				marginLeft:60,
+				marginRight:10,
+				alignItems:"center",
+				justifyContent:"center",
+				elevation:4,
+				alignSelf:"flex-end",
+				marginTop:10
+		}
 });
