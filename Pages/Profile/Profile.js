@@ -23,7 +23,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import {useNavigation} from "@react-navigation/native";
 import {useSelector} from "react-redux";
 import axios from "axios"
-import {userData} from "../../Api/AfterLogin"
+import {userData,personalDetails,educationDetails,workDetails,testDetails} from "../../Api/AfterLogin"
 
 const { height, width } = Dimensions.get("window" || "screen");
 
@@ -731,6 +731,7 @@ const DocumentDetailView = ()=>{
 const [PersonData,setPersonData] = useState([])
 const [image,setimage] = useState()
 useEffect(()=>{
+  const UserId = user.userList[0].id
 	userData(user.userList[0].id)
 	.then(function(response){
 		console.log({response});
@@ -750,6 +751,43 @@ useEffect(()=>{
 	.catch(function(error){
 		console.log(error);
 	})
+
+  // personal details
+  
+  personalDetails(UserId)
+  .then(function(response){
+    console.log(response);
+    setInputFields({...inputFields,state:response.address.state,pincode:response.address.pinCode,address:response.address})
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+
+  educationDetails(UserId)
+  .then(function(response){
+    // console.log(response);
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+
+  workDetails(UserId)
+  .then(function(response){
+    // console.log(response);
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+
+  testDetails(UserId)
+  .then(function(response){
+    // console.log(response);
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+
+
 },[])
 let imagePreview = (
 	<Image

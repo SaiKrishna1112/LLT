@@ -104,7 +104,7 @@ const ApplicationScreen = () => {
 		},[pageNo])
 
   return (
-    <View>
+    <View style={{flex:1}}>
          <View style={styles.pageBackground}>
              <TouchableOpacity style={styles.circleView} onPress={()=>{prevPage()}}>
 												  	<IonIcons name="chevron-back" color="black" size={28} />
@@ -114,7 +114,7 @@ const ApplicationScreen = () => {
 													<IonIcons name="chevron-forward" color="black" size={28} />
 													</TouchableOpacity>
 								</View>
-								{/* {!dataSource ? */}
+								{dataSource.length != 0 ?
             <FlatList 
 												data={dataSource}
 												renderItem={renderItem}
@@ -122,10 +122,10 @@ const ApplicationScreen = () => {
 												/>
 
 
-												{/* :
+												:
 												<View style={{justifyContent:"center",alignItems:"center",marginTop:50}}>
 															<Text style={{fontWeight:"bold",fontSize:25}}>No Data Found</Text>
-												</View>} */}
+												</View>}
         
     </View>
   )
@@ -171,11 +171,11 @@ const styles = StyleSheet.create({
     },
     statusBox:{
         width:width*0.3,
-        height:25,
+        height:20,
         backgroundColor:"#B5C0D0",
         borderRadius:5,
         justifyContent:"center",
-        marginLeft:width*0.046,
+        marginLeft:width*0.04,
         top:2
     },
     iconView1:{

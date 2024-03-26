@@ -66,7 +66,7 @@ export const userData= async(value)=>{
 						method: 'GET'
 				})
 				.then(function (response) {
-				console.log("getting",response.data);
+				// console.log("getting",response.data);
 					resp = response.data
 				})
 				.catch(function (error) {
@@ -77,6 +77,78 @@ export const userData= async(value)=>{
 				return (resp);
 }
 
-export const profileEdit= async()=>{
+export const personalDetails = async(value)=>{
+	console.log(value,"Personal Details");
+	let resp;
+					await  axios({
+						url: `https://lltapp.net/api/v1/users/profile-details/user/${value}`,
+						method: 'GET'
+				})
+				.then(function (response) {
+				// console.log("getting",response.data);
+					resp = response.data
+				})
+				.catch(function (error) {
+						// console.log(error.response.data);
+										resp=error.response.data
+				});
+				// console.log({resp});
+				return (resp);
+}
 
+export const educationDetails = async(value)=>{
+	console.log(value,"Education Details");
+	let resp;
+					await  axios({
+						url: `https://lltapp.net/api/v1/users/educational-details/user/${value}`,
+						method: 'GET'
+				})
+				.then(function (response) {
+				// console.log("getting",response.data);
+					resp = response.data
+				})
+				.catch(function (error) {
+						// console.log(error.response.data);
+										resp=error.response.data
+				});
+				// console.log({resp});
+				return (resp);
+}
+
+export const workDetails = async(value)=>{
+	console.log(value,"work Details");
+	let resp;
+					await  axios({
+						url: `https://lltapp.net/api/v1/users/workexperience/user/${value}`,
+						method: 'GET'
+				})
+				.then(function (response) {
+				// console.log("getting",response.data);
+					resp = response.data
+				})
+				.catch(function (error) {
+						// console.log(error.response.data);
+										resp=error.response.data
+				});
+				// console.log({resp});
+				return (resp);
+}
+
+export const testDetails = async(value)=>{
+	console.log(value,"Test Details");
+	let resp;
+					await  axios({
+						url: `https://lltapp.net/api/v1//test-scores/user/${value}`,
+						method: 'GET'
+				})
+				.then(function (response) {
+				// console.log("getting",response.data);
+					resp = response.data
+				})
+				.catch(function (error) {
+						// console.log(error.response.data);
+										resp=error.response.data
+				});
+				// console.log({resp});
+				return (resp);
 }
