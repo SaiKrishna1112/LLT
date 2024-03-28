@@ -138,15 +138,15 @@ export const testDetails = async(value)=>{
 	console.log(value,"Test Details");
 	let resp;
 					await  axios({
-						url: `https://lltapp.net/api/v1//test-scores/user/${value}`,
+						url: `https://lltapp.net/api/v1/users/test-scores/user/${value}`,
 						method: 'GET'
 				})
 				.then(function (response) {
-				// console.log("getting",response.data);
+				console.log("getting",response.data);
 					resp = response.data
 				})
 				.catch(function (error) {
-						// console.log(error.response.data);
+						console.log(error.response.data);
 										resp=error.response.data
 				});
 				// console.log({resp});
